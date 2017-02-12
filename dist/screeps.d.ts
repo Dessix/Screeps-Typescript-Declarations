@@ -1987,6 +1987,11 @@ interface Source extends RoomObject {
      */
     readonly energyCapacity: number;
     /**
+     * If you can get an instance of Source, you can see it.
+     * If you can see a Source, you can see the room it's in.
+     */
+    room: Room;
+    /**
      * The remaining time after which the source will be refilled.
      */
     readonly ticksToRegeneration: number;
@@ -2080,6 +2085,11 @@ interface Structure extends RoomObject {
      * The total amount of hit points of the structure.
      */
     readonly hitsMax: number;
+    /**
+     * If you can get an instance of a Structure, you can see it.
+     * If you can see the Structure, you can see the room it's in.
+     */
+    room: Room;
     /**
      * One of the STRUCTURE_* constants.
      */
