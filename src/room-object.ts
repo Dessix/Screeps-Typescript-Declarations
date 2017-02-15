@@ -3,7 +3,12 @@
  * are derived from RoomObject.
  */
 
-interface RoomObject {
+interface RoomObjectLike {
+    pos: RoomPositionLike;
+    room?: Room;
+}
+
+interface RoomObject extends RoomObjectLike {
     readonly prototype: RoomObject;
     /**
      * An object representing the position of this object in the room.
@@ -14,7 +19,7 @@ interface RoomObject {
      * flag or a construction site and is placed in a room that is not visible
      * to you.
      */
-    room: Room | undefined;
+    room?: Room;
 }
 
 interface RoomObjectConstructor extends _Constructor<RoomObject> {

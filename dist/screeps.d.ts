@@ -254,51 +254,95 @@ declare type STRUCTURE_WALL = "constructedWall";
 declare const STRUCTURE_WALL: STRUCTURE_WALL;
 declare type CONSTRUCTABLE_STRUCTURE = (STRUCTURE_CONTAINER | STRUCTURE_EXTENSION | STRUCTURE_EXTRACTOR | STRUCTURE_LAB | STRUCTURE_LINK | STRUCTURE_NUKER | STRUCTURE_OBSERVER | STRUCTURE_POWER_SPAWN | STRUCTURE_RAMPART | STRUCTURE_ROAD | STRUCTURE_SPAWN | STRUCTURE_STORAGE | STRUCTURE_TERMINAL | STRUCTURE_TOWER | STRUCTURE_WALL);
 declare type STRUCTURE = CONSTRUCTABLE_STRUCTURE | (STRUCTURE_CONTROLLER | STRUCTURE_KEEPER_LAIR | STRUCTURE_PORTAL | STRUCTURE_POWER_BANK);
-declare const RESOURCE_ENERGY: "energy";
-declare const RESOURCE_POWER: "power";
-declare const RESOURCE_UTRIUM: "U";
-declare const RESOURCE_LEMERGIUM: "L";
-declare const RESOURCE_KEANIUM: "K";
-declare const RESOURCE_GHODIUM: "G";
-declare const RESOURCE_ZYNTHIUM: "Z";
-declare const RESOURCE_OXYGEN: "O";
-declare const RESOURCE_HYDROGEN: "H";
-declare const RESOURCE_CATALYST: "X";
-declare const RESOURCE_HYDROXIDE: "OH";
-declare const RESOURCE_ZYNTHIUM_KEANITE: "ZK";
-declare const RESOURCE_UTRIUM_LEMERGITE: "UL";
-declare const RESOURCE_UTRIUM_HYDRIDE: "UH";
-declare const RESOURCE_UTRIUM_OXIDE: "UO";
-declare const RESOURCE_KEANIUM_HYDRIDE: "KH";
-declare const RESOURCE_KEANIUM_OXIDE: "KO";
-declare const RESOURCE_LEMERGIUM_HYDRIDE: "LH";
-declare const RESOURCE_LEMERGIUM_OXIDE: "LO";
-declare const RESOURCE_ZYNTHIUM_HYDRIDE: "ZH";
-declare const RESOURCE_ZYNTHIUM_OXIDE: "ZO";
-declare const RESOURCE_GHODIUM_HYDRIDE: "GH";
-declare const RESOURCE_GHODIUM_OXIDE: "GO";
-declare const RESOURCE_UTRIUM_ACID: "UH2O";
-declare const RESOURCE_UTRIUM_ALKALIDE: "UHO2";
-declare const RESOURCE_KEANIUM_ACID: "KH2O";
-declare const RESOURCE_KEANIUM_ALKALIDE: "KHO2";
-declare const RESOURCE_LEMERGIUM_ACID: "LH2O";
-declare const RESOURCE_LEMERGIUM_ALKALIDE: "LHO2";
-declare const RESOURCE_ZYNTHIUM_ACID: "ZH2O";
-declare const RESOURCE_ZYNTHIUM_ALKALIDE: "ZHO2";
-declare const RESOURCE_GHODIUM_ACID: "GH2O";
-declare const RESOURCE_GHODIUM_ALKALIDE: "GHO2";
-declare const RESOURCE_CATALYZED_UTRIUM_ACID: "XUH2O";
-declare const RESOURCE_CATALYZED_UTRIUM_ALKALIDE: "XUHO2";
-declare const RESOURCE_CATALYZED_KEANIUM_ACID: "XKH2O";
-declare const RESOURCE_CATALYZED_KEANIUM_ALKALIDE: "XKHO2";
-declare const RESOURCE_CATALYZED_LEMERGIUM_ACID: "XLH2O";
-declare const RESOURCE_CATALYZED_LEMERGIUM_ALKALIDE: "XLHO2";
-declare const RESOURCE_CATALYZED_ZYNTHIUM_ACID: "XZH2O";
-declare const RESOURCE_CATALYZED_ZYNTHIUM_ALKALIDE: "ZXHO2";
-declare const RESOURCE_CATALYZED_GHODIUM_ACID: "XGH2O";
-declare const RESOURCE_CATALYZED_GHODIUM_ALKALIDE: "XGHO2";
-declare const RESOURCES_ALL: string[];
-declare const SUBSCRIPTION_TOKEN: string;
+declare type RESOURCE_ENERGY = "energy";
+declare const RESOURCE_ENERGY: RESOURCE_ENERGY;
+declare type RESOURCE_POWER = "power";
+declare const RESOURCE_POWER: RESOURCE_POWER;
+declare type RESOURCE_UTRIUM = "U";
+declare const RESOURCE_UTRIUM: RESOURCE_UTRIUM;
+declare type RESOURCE_LEMERGIUM = "L";
+declare const RESOURCE_LEMERGIUM: RESOURCE_LEMERGIUM;
+declare type RESOURCE_KEANIUM = "K";
+declare const RESOURCE_KEANIUM: RESOURCE_KEANIUM;
+declare type RESOURCE_GHODIUM = "G";
+declare const RESOURCE_GHODIUM: RESOURCE_GHODIUM;
+declare type RESOURCE_ZYNTHIUM = "Z";
+declare const RESOURCE_ZYNTHIUM: RESOURCE_ZYNTHIUM;
+declare type RESOURCE_OXYGEN = "O";
+declare const RESOURCE_OXYGEN: RESOURCE_OXYGEN;
+declare type RESOURCE_HYDROGEN = "H";
+declare const RESOURCE_HYDROGEN: RESOURCE_HYDROGEN;
+declare type RESOURCE_CATALYST = "X";
+declare const RESOURCE_CATALYST: RESOURCE_CATALYST;
+declare type RESOURCE_HYDROXIDE = "OH";
+declare const RESOURCE_HYDROXIDE: RESOURCE_HYDROXIDE;
+declare type RESOURCE_ZYNTHIUM_KEANITE = "ZK";
+declare const RESOURCE_ZYNTHIUM_KEANITE: RESOURCE_ZYNTHIUM_KEANITE;
+declare type RESOURCE_UTRIUM_LEMERGITE = "UL";
+declare const RESOURCE_UTRIUM_LEMERGITE: RESOURCE_UTRIUM_LEMERGITE;
+declare type RESOURCE_UTRIUM_HYDRIDE = "UH";
+declare const RESOURCE_UTRIUM_HYDRIDE: RESOURCE_UTRIUM_HYDRIDE;
+declare type RESOURCE_UTRIUM_OXIDE = "UO";
+declare const RESOURCE_UTRIUM_OXIDE: RESOURCE_UTRIUM_OXIDE;
+declare type RESOURCE_KEANIUM_HYDRIDE = "KH";
+declare const RESOURCE_KEANIUM_HYDRIDE: RESOURCE_KEANIUM_HYDRIDE;
+declare type RESOURCE_KEANIUM_OXIDE = "KO";
+declare const RESOURCE_KEANIUM_OXIDE: RESOURCE_KEANIUM_OXIDE;
+declare type RESOURCE_LEMERGIUM_HYDRIDE = "LH";
+declare const RESOURCE_LEMERGIUM_HYDRIDE: RESOURCE_LEMERGIUM_HYDRIDE;
+declare type RESOURCE_LEMERGIUM_OXIDE = "LO";
+declare const RESOURCE_LEMERGIUM_OXIDE: RESOURCE_LEMERGIUM_OXIDE;
+declare type RESOURCE_ZYNTHIUM_HYDRIDE = "ZH";
+declare const RESOURCE_ZYNTHIUM_HYDRIDE: RESOURCE_ZYNTHIUM_HYDRIDE;
+declare type RESOURCE_ZYNTHIUM_OXIDE = "ZO";
+declare const RESOURCE_ZYNTHIUM_OXIDE: RESOURCE_ZYNTHIUM_OXIDE;
+declare type RESOURCE_GHODIUM_HYDRIDE = "GH";
+declare const RESOURCE_GHODIUM_HYDRIDE: RESOURCE_GHODIUM_HYDRIDE;
+declare type RESOURCE_GHODIUM_OXIDE = "GO";
+declare const RESOURCE_GHODIUM_OXIDE: RESOURCE_GHODIUM_OXIDE;
+declare type RESOURCE_UTRIUM_ACID = "UH2O";
+declare const RESOURCE_UTRIUM_ACID: RESOURCE_UTRIUM_ACID;
+declare type RESOURCE_UTRIUM_ALKALIDE = "UHO2";
+declare const RESOURCE_UTRIUM_ALKALIDE: RESOURCE_UTRIUM_ALKALIDE;
+declare type RESOURCE_KEANIUM_ACID = "KH2O";
+declare const RESOURCE_KEANIUM_ACID: RESOURCE_KEANIUM_ACID;
+declare type RESOURCE_KEANIUM_ALKALIDE = "KHO2";
+declare const RESOURCE_KEANIUM_ALKALIDE: RESOURCE_KEANIUM_ALKALIDE;
+declare type RESOURCE_LEMERGIUM_ACID = "LH2O";
+declare const RESOURCE_LEMERGIUM_ACID: RESOURCE_LEMERGIUM_ACID;
+declare type RESOURCE_LEMERGIUM_ALKALIDE = "LHO2";
+declare const RESOURCE_LEMERGIUM_ALKALIDE: RESOURCE_LEMERGIUM_ALKALIDE;
+declare type RESOURCE_ZYNTHIUM_ACID = "ZH2O";
+declare const RESOURCE_ZYNTHIUM_ACID: RESOURCE_ZYNTHIUM_ACID;
+declare type RESOURCE_ZYNTHIUM_ALKALIDE = "ZHO2";
+declare const RESOURCE_ZYNTHIUM_ALKALIDE: RESOURCE_ZYNTHIUM_ALKALIDE;
+declare type RESOURCE_GHODIUM_ACID = "GH2O";
+declare const RESOURCE_GHODIUM_ACID: RESOURCE_GHODIUM_ACID;
+declare type RESOURCE_GHODIUM_ALKALIDE = "GHO2";
+declare const RESOURCE_GHODIUM_ALKALIDE: RESOURCE_GHODIUM_ALKALIDE;
+declare type RESOURCE_CATALYZED_UTRIUM_ACID = "XUH2O";
+declare const RESOURCE_CATALYZED_UTRIUM_ACID: RESOURCE_CATALYZED_UTRIUM_ACID;
+declare type RESOURCE_CATALYZED_UTRIUM_ALKALIDE = "XUHO2";
+declare const RESOURCE_CATALYZED_UTRIUM_ALKALIDE: RESOURCE_CATALYZED_UTRIUM_ALKALIDE;
+declare type RESOURCE_CATALYZED_KEANIUM_ACID = "XKH2O";
+declare const RESOURCE_CATALYZED_KEANIUM_ACID: RESOURCE_CATALYZED_KEANIUM_ACID;
+declare type RESOURCE_CATALYZED_KEANIUM_ALKALIDE = "XKHO2";
+declare const RESOURCE_CATALYZED_KEANIUM_ALKALIDE: RESOURCE_CATALYZED_KEANIUM_ALKALIDE;
+declare type RESOURCE_CATALYZED_LEMERGIUM_ACID = "XLH2O";
+declare const RESOURCE_CATALYZED_LEMERGIUM_ACID: RESOURCE_CATALYZED_LEMERGIUM_ACID;
+declare type RESOURCE_CATALYZED_LEMERGIUM_ALKALIDE = "XLHO2";
+declare const RESOURCE_CATALYZED_LEMERGIUM_ALKALIDE: RESOURCE_CATALYZED_LEMERGIUM_ALKALIDE;
+declare type RESOURCE_CATALYZED_ZYNTHIUM_ACID = "XZH2O";
+declare const RESOURCE_CATALYZED_ZYNTHIUM_ACID: RESOURCE_CATALYZED_ZYNTHIUM_ACID;
+declare type RESOURCE_CATALYZED_ZYNTHIUM_ALKALIDE = "ZXHO2";
+declare const RESOURCE_CATALYZED_ZYNTHIUM_ALKALIDE: RESOURCE_CATALYZED_ZYNTHIUM_ALKALIDE;
+declare type RESOURCE_CATALYZED_GHODIUM_ACID = "XGH2O";
+declare const RESOURCE_CATALYZED_GHODIUM_ACID: RESOURCE_CATALYZED_GHODIUM_ACID;
+declare type RESOURCE_CATALYZED_GHODIUM_ALKALIDE = "XGHO2";
+declare const RESOURCE_CATALYZED_GHODIUM_ALKALIDE: RESOURCE_CATALYZED_GHODIUM_ALKALIDE;
+declare type RESOURCE = (RESOURCE_ENERGY | RESOURCE_POWER | RESOURCE_UTRIUM | RESOURCE_LEMERGIUM | RESOURCE_KEANIUM | RESOURCE_GHODIUM | RESOURCE_ZYNTHIUM | RESOURCE_OXYGEN | RESOURCE_HYDROGEN | RESOURCE_CATALYST | RESOURCE_HYDROXIDE | RESOURCE_ZYNTHIUM_KEANITE | RESOURCE_UTRIUM_LEMERGITE | RESOURCE_UTRIUM_HYDRIDE | RESOURCE_UTRIUM_OXIDE | RESOURCE_KEANIUM_HYDRIDE | RESOURCE_KEANIUM_OXIDE | RESOURCE_LEMERGIUM_HYDRIDE | RESOURCE_LEMERGIUM_OXIDE | RESOURCE_ZYNTHIUM_HYDRIDE | RESOURCE_ZYNTHIUM_OXIDE | RESOURCE_GHODIUM_HYDRIDE | RESOURCE_GHODIUM_OXIDE | RESOURCE_UTRIUM_ACID | RESOURCE_UTRIUM_ALKALIDE | RESOURCE_KEANIUM_ACID | RESOURCE_KEANIUM_ALKALIDE | RESOURCE_LEMERGIUM_ACID | RESOURCE_LEMERGIUM_ALKALIDE | RESOURCE_ZYNTHIUM_ACID | RESOURCE_ZYNTHIUM_ALKALIDE | RESOURCE_GHODIUM_ACID | RESOURCE_GHODIUM_ALKALIDE | RESOURCE_CATALYZED_UTRIUM_ACID | RESOURCE_CATALYZED_UTRIUM_ALKALIDE | RESOURCE_CATALYZED_KEANIUM_ACID | RESOURCE_CATALYZED_KEANIUM_ALKALIDE | RESOURCE_CATALYZED_LEMERGIUM_ACID | RESOURCE_CATALYZED_LEMERGIUM_ALKALIDE | RESOURCE_CATALYZED_ZYNTHIUM_ACID | RESOURCE_CATALYZED_ZYNTHIUM_ALKALIDE | RESOURCE_CATALYZED_GHODIUM_ACID | RESOURCE_CATALYZED_GHODIUM_ALKALIDE);
+declare const RESOURCES_ALL: RESOURCE[];
+declare const SUBSCRIPTION_TOKEN: "token";
 declare const CONTROLLER_LEVELS: {
     [level: number]: number;
 };
@@ -353,6 +397,7 @@ declare const MODE_ARENA: string;
 declare type TERRAIN_PLAIN = "plain";
 declare type TERRAIN_SWAMP = "swamp";
 declare type TERRAIN_WALL = "wall";
+declare type TERRAIN = (TERRAIN_PLAIN | TERRAIN_SWAMP | TERRAIN_WALL);
 declare const TERRAIN_MASK_WALL: number;
 declare const TERRAIN_MASK_SWAMP: number;
 declare const TERRAIN_MASK_LAVA: number;
@@ -418,29 +463,35 @@ declare const BOOSTS: {
         };
     };
 };
-declare type LOOK_CREEPS = "creep";
+interface LOOK_FOR<Target extends string, TargType> {
+}
+declare type LOOK_FOR_INTER<Target extends string, TargType> = LOOK_FOR<Target, TargType> & Target;
+declare type LOOK_CREEPS = LOOK_FOR_INTER<"creep", Creep>;
 declare const LOOK_CREEPS: LOOK_CREEPS;
-declare type LOOK_ENERGY = "energy";
+declare type LOOK_ENERGY = LOOK_FOR_INTER<"energy", Resource>;
 declare const LOOK_ENERGY: LOOK_ENERGY;
-declare type LOOK_RESOURCES = "resource";
+declare type LOOK_RESOURCES = LOOK_FOR_INTER<"resource", Resource>;
 declare const LOOK_RESOURCES: LOOK_RESOURCES;
-declare type LOOK_SOURCES = "source";
+declare type LOOK_SOURCES = LOOK_FOR_INTER<"source", Source>;
 declare const LOOK_SOURCES: LOOK_SOURCES;
-declare type LOOK_MINERALS = "mineral";
+declare type LOOK_MINERALS = LOOK_FOR_INTER<"mineral", Mineral>;
 declare const LOOK_MINERALS: LOOK_MINERALS;
-declare type LOOK_STRUCTURES = "structure";
+declare type LOOK_STRUCTURES = LOOK_FOR_INTER<"structure", Structure>;
 declare const LOOK_STRUCTURES: LOOK_STRUCTURES;
-declare type LOOK_FLAGS = "flag";
+declare type LOOK_FLAGS = LOOK_FOR_INTER<"flag", Flag>;
 declare const LOOK_FLAGS: LOOK_FLAGS;
-declare type LOOK_CONSTRUCTION_SITES = "constructionSite";
+declare type LOOK_CONSTRUCTION_SITES = LOOK_FOR_INTER<"constructionSite", ConstructionSite>;
 declare const LOOK_CONSTRUCTION_SITES: LOOK_CONSTRUCTION_SITES;
-declare type LOOK_NUKES = "nuke";
+declare type LOOK_NUKES = LOOK_FOR_INTER<"nuke", Nuke>;
 declare const LOOK_NUKES: LOOK_NUKES;
-declare type LOOK_TERRAIN = "terrain";
+declare type LOOK_TERRAIN = LOOK_FOR_INTER<"terrain", TERRAIN>;
 declare const LOOK_TERRAIN: LOOK_TERRAIN;
 declare type LOOK = (LOOK_CREEPS | LOOK_ENERGY | LOOK_RESOURCES | LOOK_SOURCES | LOOK_MINERALS | LOOK_STRUCTURES | LOOK_FLAGS | LOOK_CONSTRUCTION_SITES | LOOK_NUKES | LOOK_TERRAIN);
-declare const ORDER_SELL: "sell";
-declare const ORDER_BUY: "buy";
+declare type ORDER_SELL = "sell";
+declare const ORDER_SELL: ORDER_SELL;
+declare type ORDER_BUY = "buy";
+declare const ORDER_BUY: ORDER_BUY;
+declare type ORDER = (ORDER_SELL | ORDER_BUY);
 /**
  * A site of a structure which is currently under construction.
  */
@@ -856,9 +907,9 @@ interface GlobalControlLevel {
     progressTotal: number;
 }
 interface CPU {
-    limit: number;
-    tickLimit: number;
-    bucket: number;
+    readonly limit: number;
+    readonly tickLimit: number;
+    readonly bucket: number;
     /**
      * Get amount of CPU time used from the beginning of the current game tick. Always returns 0 in the Simulation mode.
      */
@@ -871,7 +922,7 @@ interface BodyPartDefinition {
     /**
      * If the body part is boosted, this property specifies the mineral type which is used for boosting. One of the RESOURCE_* constants.
      */
-    readonly boost: string;
+    readonly boost: RESOURCE;
     /**
      * One of the body part types constants.
      */
@@ -902,56 +953,52 @@ interface SignDefinition {
 }
 interface StoreDefinition {
     readonly [resource: string]: number | undefined;
-    readonly energy?: number;
+    readonly energy: number;
     readonly power?: number;
 }
-interface LookAtResultWithPos {
-    x: number;
-    y: number;
-    type: string;
+interface LookAtResult {
+    type: LOOK;
     constructionSite?: ConstructionSite;
     creep?: Creep;
-    terrain?: string;
-    structure?: Structure;
-    flag?: Flag;
     energy?: Resource;
     exit?: any;
+    flag?: Flag;
     source?: Source;
+    structure?: Structure;
+    terrain?: string;
     mineral?: Mineral;
     resource?: Resource;
 }
-interface LookAtResult {
-    type: string;
-    constructionSite?: ConstructionSite;
-    creep?: Creep;
-    energy?: Resource;
-    exit?: any;
-    flag?: Flag;
-    source?: Source;
-    structure?: Structure;
-    terrain?: string;
-    mineral?: Mineral;
-    resource?: Resource;
+interface LookAtResultWithPos extends LookAtResult {
+    x: number;
+    y: number;
 }
 interface SpawningSpec {
     /**
      * The name of a new creep.
      */
-    name: string;
+    readonly name: string;
     /**
      * Time needed in total to complete the spawning.
      */
-    needTime: number;
+    readonly needTime: number;
     /**
      * Remaining time to go.
      */
-    remainingTime: number;
+    readonly remainingTime: number;
 }
 interface LookAtResultMatrix {
     [coord: number]: LookAtResultMatrix | LookAtResult[];
 }
 interface FindOpts<T> {
     filter: LodashStringFilterFor<T>;
+}
+interface PointLike {
+    x: number;
+    y: number;
+}
+interface RoomPositionLike extends PointLike {
+    roomName: string;
 }
 interface FindPathOpts {
     /**
@@ -1010,6 +1057,10 @@ interface FindPathOpts {
      * The maximum allowed rooms to search. The default (and maximum) is 16. This is only used when the new PathFinder is enabled.
      */
     maxRooms?: number;
+}
+interface FindPathOptsFilteredWithAlgorithm<T> extends FindPathOpts {
+    filter?: LodashStringFilterFor<T>;
+    algorithm?: "astar" | "dijkstra";
 }
 interface MoveToOpts extends FindPathOpts {
     /**
@@ -1489,7 +1540,11 @@ declare const Resource: ResourceConstructor;
  * Any object with a position in a room. Almost all game objects prototypes
  * are derived from RoomObject.
  */
-interface RoomObject {
+interface RoomObjectLike {
+    pos: RoomPositionLike;
+    room?: Room;
+}
+interface RoomObject extends RoomObjectLike {
     readonly prototype: RoomObject;
     /**
      * An object representing the position of this object in the room.
@@ -1500,7 +1555,7 @@ interface RoomObject {
      * flag or a construction site and is placed in a room that is not visible
      * to you.
      */
-    room: Room | undefined;
+    room?: Room;
 }
 interface RoomObjectConstructor extends _Constructor<RoomObject> {
     new (x: number, y: number, roomName: string): RoomObject;
@@ -1510,7 +1565,7 @@ declare const RoomObject: RoomObjectConstructor;
 /**
  * An object representing the specified position in the room. Every object in the room contains RoomPosition as the pos property. The position object of a custom location can be obtained using the Room.getPositionAt() method or using the constructor.
  */
-interface RoomPosition {
+interface RoomPosition extends RoomPositionLike {
     readonly prototype: RoomPosition;
     /**
      * The name of the room.
@@ -1535,59 +1590,45 @@ interface RoomPosition {
      * @param color The color of a new flag. Should be one of the COLOR_* constants
      * @param secondaryColor The secondary color of a new flag. Should be one of the COLOR_* constants. The default value is equal to color.
      */
-    createFlag(name?: string, color?: COLOR, secondaryColor?: COLOR): string | ERR_NAME_EXISTS | ERR_INVALID_ARGS;
+    createFlag<FlagName extends string>(name?: FlagName, color?: COLOR, secondaryColor?: COLOR): FlagName | ERR_NAME_EXISTS | ERR_INVALID_ARGS;
     /**
      * Find an object with the shortest path from the given position. Uses A* search algorithm and Dijkstra's algorithm.
      * @param type See Room.find
      * @param opts An object containing pathfinding options (see Room.findPath), or one of the following: filter, algorithm
      */
-    findClosestByPath<T>(type: number, opts?: FindPathOpts & {
-        filter?: any | string;
-        algorithm?: string;
-    }): T;
+    findClosestByPath<T>(type: FIND, opts?: FindPathOptsFilteredWithAlgorithm<T>): T;
     /**
      * Find an object with the shortest path from the given position. Uses A* search algorithm and Dijkstra's algorithm.
      * @param objects An array of room's objects or RoomPosition objects that the search should be executed against.
      * @param opts An object containing pathfinding options (see Room.findPath), or one of the following: filter, algorithm
      */
-    findClosestByPath<T>(objects: T[] | RoomPosition[], opts?: FindPathOpts & {
-        filter?: any | string;
-        algorithm?: string;
-    }): T;
+    findClosestByPath<T extends RoomObjectLike>(objects: T[] | RoomPosition[], opts?: FindPathOptsFilteredWithAlgorithm<T>): T;
     /**
      * Find an object with the shortest linear distance from the given position.
      * @param type See Room.find.
      * @param opts
      */
-    findClosestByRange<T>(type: number, opts?: {
-        filter: any | string;
-    }): T;
+    findClosestByRange<T>(type: FIND, opts?: FindOpts<T>): T;
     /**
      * Find an object with the shortest linear distance from the given position.
      * @param objects An array of room's objects or RoomPosition objects that the search should be executed against.
      * @param opts An object containing one of the following options: filter
      */
-    findClosestByRange<T>(objects: T[] | RoomPosition[], opts?: {
-        filter: any | string;
-    }): T;
+    findClosestByRange<T extends RoomObjectLike>(objects: T[] | RoomPosition[], opts?: FindOpts<T>): T;
     /**
      * Find all objects in the specified linear range.
      * @param type See Room.find.
      * @param range The range distance.
      * @param opts See Room.find.
      */
-    findInRange<T>(type: number, range: number, opts?: {
-        filter?: any | string;
-    }): T[];
+    findInRange<T extends RoomObjectLike>(type: FIND, range: number, opts?: FindOpts<T>): T[];
     /**
      * Find all objects in the specified linear range.
      * @param objects An array of room's objects or RoomPosition objects that the search should be executed against.
      * @param range The range distance.
      * @param opts See Room.find.
      */
-    findInRange<T>(objects: T[] | RoomPosition[], range: number, opts?: {
-        filter?: any | string;
-    }): T[];
+    findInRange<T extends RoomObjectLike>(objects: T[] | RoomPosition[], range: number, opts?: FindOpts<T>): T[];
     /**
      * Find an optimal path to the specified position using A* search algorithm. This method is a shorthand for Room.findPath. If the target is in another room, then the corresponding exit will be used as a target.
      * @param x X position in the room.
@@ -1600,7 +1641,7 @@ interface RoomPosition {
      * @param target Can be a RoomPosition object or any object containing RoomPosition.
      * @param opts An object containing pathfinding options flags (see Room.findPath for more details).
      */
-    findPathTo(target: RoomPosition | RoomObject, opts?: FindPathOpts): PathStep[];
+    findPathTo(target: RoomPosition | RoomObjectLike, opts?: FindPathOpts): PathStep[];
     /**
      * Get linear direction to the specified position.
      * @param x X position in the room.
@@ -1611,7 +1652,7 @@ interface RoomPosition {
      * Get linear direction to the specified position.
      * @param target Can be a RoomPosition object or any object containing RoomPosition.
      */
-    getDirectionTo(target: RoomPosition | RoomObject): DIRECTION;
+    getDirectionTo(target: RoomPosition | RoomObjectLike): DIRECTION;
     /**
      * Get linear range to the specified position.
      * @param x X position in the room.
@@ -1622,13 +1663,13 @@ interface RoomPosition {
      * Get linear range to the specified position.
      * @param target Can be a RoomPosition object or any object containing RoomPosition.
      */
-    getRangeTo(target: RoomPosition | RoomObject): number;
+    getRangeTo(target: RoomPosition | RoomObjectLike): number;
     /**
      * Check whether this position is in the given range of another position.
      * @param toPos The target position.
      * @param range The range distance.
      */
-    inRangeTo(target: RoomPosition | RoomObject, range: number): boolean;
+    inRangeTo(target: RoomPosition | RoomObjectLike, range: number): boolean;
     /**
      * Check whether this position is the same as the specified position.
      * @param x X position in the room.
@@ -1639,7 +1680,7 @@ interface RoomPosition {
      * Check whether this position is the same as the specified position.
      * @param target Can be a RoomPosition object or any object containing RoomPosition.
      */
-    isEqualTo(target: RoomPosition | RoomObject): boolean;
+    isEqualTo(target: RoomPosition | RoomObjectLike): boolean;
     /**
      * Check whether this position is on the adjacent square to the specified position. The same as inRangeTo(target, 1).
      * @param x X position in the room.
@@ -1650,7 +1691,7 @@ interface RoomPosition {
      * Check whether this position is on the adjacent square to the specified position. The same as inRangeTo(target, 1).
      * @param target Can be a RoomPosition object or any object containing RoomPosition.
      */
-    isNearTo(target: RoomPosition | RoomObject): boolean;
+    isNearTo(target: RoomPosition | RoomObjectLike): boolean;
     /**
      * Get the list of objects at the specified room position.
      */
@@ -1659,7 +1700,8 @@ interface RoomPosition {
      * Get an object with the given type at the specified room position.
      * @param type One of the following string constants: constructionSite, creep, exit, flag, resource, source, structure, terrain
      */
-    lookFor<T>(type: string): T[];
+    lookFor<TLIT extends LOOK, T>(type: LOOK_FOR<TLIT, T>): T[];
+    lookFor<T>(type: LOOK): T[];
 }
 interface RoomPositionConstructor extends _Constructor<RoomPosition> {
     /**
@@ -1838,7 +1880,7 @@ interface Room {
      * @param opts An object with additional options
      * @returns An array with the objects found.
      */
-    find<T>(type: number, opts?: FindOpts<T>): T[];
+    find<T>(type: FIND, opts?: FindOpts<T>): T[];
     /**
      * Find the exit direction en route to another room.
      * @param room Another room name or room object.
@@ -1873,7 +1915,7 @@ interface Room {
      * @param target Can be a RoomPosition object or any object containing RoomPosition.
      * @returns An array with objects at the specified position
      */
-    lookAt(target: RoomPosition | RoomObject): LookAtResult[];
+    lookAt(target: RoomPosition | RoomObjectLike): LookAtResult[];
     /**
      * Get the list of objects at the specified room area. This method is more CPU efficient in comparison to multiple lookAt calls.
      * @param top The top Y boundary of the area.
@@ -1883,7 +1925,9 @@ interface Room {
      * @param asArray Set to true if you want to get the result as a plain array.
      * @returns An object with all the objects in the specified area
      */
-    lookAtArea(top: number, left: number, bottom: number, right: number, asArray?: boolean): LookAtResultMatrix | LookAtResultWithPos[];
+    lookAtArea(top: number, left: number, bottom: number, right: number): LookAtResultMatrix;
+    lookAtArea(top: number, left: number, bottom: number, right: number, asArray: false): LookAtResultMatrix;
+    lookAtArea(top: number, left: number, bottom: number, right: number, asArray: true): LookAtResultWithPos[];
     /**
      * Get an object with the given type at the specified room position.
      * @param type One of the following string constants: constructionSite, creep, energy, exit, flag, source, structure, terrain
@@ -1891,14 +1935,14 @@ interface Room {
      * @param y The Y position.
      * @returns An array of objects of the given type at the specified position if found.
      */
-    lookForAt<T>(type: string, x: number, y: number): T[];
+    lookForAt<T>(type: LOOK, x: number, y: number): T[];
     /**
      * Get an object with the given type at the specified room position.
      * @param type One of the following string constants: constructionSite, creep, energy, exit, flag, source, structure, terrain
      * @param target Can be a RoomPosition object or any object containing RoomPosition.
      * @returns An array of objects of the given type at the specified position if found.
      */
-    lookForAt<T>(type: string, target: RoomPosition | RoomObject): T[];
+    lookForAt<T>(type: LOOK, target: RoomPositionLike | RoomObjectLike): T[];
     /**
      * Get the list of objects with the given type at the specified room area. This method is more CPU efficient in comparison to multiple lookForAt calls.
      * @param type One of the following string constants: constructionSite, creep, energy, exit, flag, source, structure, terrain
@@ -1908,7 +1952,9 @@ interface Room {
      * @param right The right X boundary of the area.
      * @returns An object with all the objects of the given type in the specified area
      */
-    lookForAtArea(type: string, top: number, left: number, bottom: number, right: number, asArray?: boolean): LookAtResultMatrix | LookAtResultWithPos[];
+    lookForAtArea(type: LOOK, top: number, left: number, bottom: number, right: number): LookAtResultMatrix;
+    lookForAtArea(type: LOOK, top: number, left: number, bottom: number, right: number, asArray: false): LookAtResultMatrix;
+    lookForAtArea(type: LOOK, top: number, left: number, bottom: number, right: number, asArray: true): LookAtResultWithPos[];
 }
 interface RoomConstructor {
     new (id: string): Room;

@@ -78,7 +78,7 @@ interface Room {
      * @param opts An object with additional options
      * @returns An array with the objects found.
      */
-    find<T>(type: number, opts?: FindOpts<T>): T[];
+    find<T>(type: FIND, opts?: FindOpts<T>): T[];//TODO: AUTOGENERIC!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     /**
      * Find the exit direction en route to another room.
      * @param room Another room name or room object.
@@ -113,7 +113,7 @@ interface Room {
      * @param target Can be a RoomPosition object or any object containing RoomPosition.
      * @returns An array with objects at the specified position
      */
-    lookAt(target: RoomPosition | RoomObject): LookAtResult[];
+    lookAt(target: RoomPosition | RoomObjectLike): LookAtResult[];
     /**
      * Get the list of objects at the specified room area. This method is more CPU efficient in comparison to multiple lookAt calls.
      * @param top The top Y boundary of the area.
@@ -123,7 +123,9 @@ interface Room {
      * @param asArray Set to true if you want to get the result as a plain array.
      * @returns An object with all the objects in the specified area
      */
-    lookAtArea(top: number, left: number, bottom: number, right: number, asArray?: boolean): LookAtResultMatrix | LookAtResultWithPos[];
+    lookAtArea(top: number, left: number, bottom: number, right: number): LookAtResultMatrix;
+    lookAtArea(top: number, left: number, bottom: number, right: number, asArray: false): LookAtResultMatrix;
+    lookAtArea(top: number, left: number, bottom: number, right: number, asArray: true): LookAtResultWithPos[];
     /**
      * Get an object with the given type at the specified room position.
      * @param type One of the following string constants: constructionSite, creep, energy, exit, flag, source, structure, terrain
@@ -131,14 +133,14 @@ interface Room {
      * @param y The Y position.
      * @returns An array of objects of the given type at the specified position if found.
      */
-    lookForAt<T>(type: string, x: number, y: number): T[];
+    lookForAt<T>(type: LOOK, x: number, y: number): T[];//TODO: AUTOGENERIC!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     /**
      * Get an object with the given type at the specified room position.
      * @param type One of the following string constants: constructionSite, creep, energy, exit, flag, source, structure, terrain
      * @param target Can be a RoomPosition object or any object containing RoomPosition.
      * @returns An array of objects of the given type at the specified position if found.
      */
-    lookForAt<T>(type: string, target: RoomPosition | RoomObject): T[];
+    lookForAt<T>(type: LOOK, target: RoomPositionLike | RoomObjectLike): T[];//TODO: AUTOGENERIC!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     /**
      * Get the list of objects with the given type at the specified room area. This method is more CPU efficient in comparison to multiple lookForAt calls.
      * @param type One of the following string constants: constructionSite, creep, energy, exit, flag, source, structure, terrain
@@ -148,7 +150,9 @@ interface Room {
      * @param right The right X boundary of the area.
      * @returns An object with all the objects of the given type in the specified area
      */
-    lookForAtArea(type: string, top: number, left: number, bottom: number, right: number, asArray?: boolean): LookAtResultMatrix | LookAtResultWithPos[];
+    lookForAtArea(type: LOOK, top: number, left: number, bottom: number, right: number): LookAtResultMatrix;//TODO: AUTOGENERIC!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    lookForAtArea(type: LOOK, top: number, left: number, bottom: number, right: number, asArray: false): LookAtResultMatrix;//TODO: AUTOGENERIC!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    lookForAtArea(type: LOOK, top: number, left: number, bottom: number, right: number, asArray: true): LookAtResultWithPos[];//TODO: AUTOGENERIC!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     /**
      * Serialize a path array into a short string representation, which is suitable to store in memory.

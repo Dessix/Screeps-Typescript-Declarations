@@ -5,9 +5,9 @@ interface GlobalControlLevel {
 }
 
 interface CPU {
-    limit: number;
-    tickLimit: number;
-    bucket: number;
+    readonly limit: number;
+    readonly tickLimit: number;
+    readonly bucket: number;
 
     /**
      * Get amount of CPU time used from the beginning of the current game tick. Always returns 0 in the Simulation mode.
@@ -22,7 +22,7 @@ interface BodyPartDefinition {
     /**
      * If the body part is boosted, this property specifies the mineral type which is used for boosting. One of the RESOURCE_* constants.
      */
-    readonly boost: string;
+    readonly boost: RESOURCE;
     /**
      * One of the body part types constants.
      */
@@ -43,39 +43,27 @@ declare type DescribeExitsResult = {
 interface Owner {
     readonly username: string;
 }
+
 interface ReservationDefinition {
     readonly username: string;
     ticksToEnd: number;
 }
+
 interface SignDefinition {
     readonly username: string;
     readonly text: string;
     readonly time: number;
     readonly datetime: Date;
 }
-interface StoreDefinition {
+
+interface StoreDefinition {//TODO: AUTOPROPERTY
     readonly [resource: string]: number | undefined;
-    readonly energy?: number;
+    readonly energy: number;
     readonly power?: number;
 }
 
-interface LookAtResultWithPos {
-    x: number;
-    y: number;
-    type: string;
-    constructionSite?: ConstructionSite;
-    creep?: Creep;
-    terrain?: string;
-    structure?: Structure;
-    flag?: Flag;
-    energy?: Resource;
-    exit?: any;
-    source?: Source;
-    mineral?: Mineral;
-    resource? : Resource;
-}
-interface LookAtResult {
-    type: string;
+interface LookAtResult {//TODO: AUTOPROPERTY
+    type: LOOK;
     constructionSite?: ConstructionSite;
     creep?: Creep;
     energy?: Resource;
@@ -88,27 +76,41 @@ interface LookAtResult {
     resource?: Resource;
 }
 
+interface LookAtResultWithPos extends LookAtResult {
+    x: number;
+    y: number;
+}
+
 interface SpawningSpec {
     /**
      * The name of a new creep.
      */
-    name: string;
+    readonly name: string;
     /**
      * Time needed in total to complete the spawning.
      */
-    needTime: number;
+    readonly needTime: number;
     /**
      * Remaining time to go.
      */
-    remainingTime: number;
+    readonly remainingTime: number;
 };
 
 interface LookAtResultMatrix {
-    [coord: number]: LookAtResultMatrix|LookAtResult[]
-}
+    [coord: number]: LookAtResultMatrix|LookAtResult[];
+};
 
 interface FindOpts<T> {
     filter: LodashStringFilterFor<T>;
+};
+
+interface PointLike {
+    x: number;
+    y: number;
+}
+
+interface RoomPositionLike extends PointLike {
+    roomName: string;
 }
 
 interface FindPathOpts {
@@ -177,6 +179,11 @@ interface FindPathOpts {
      * The maximum allowed rooms to search. The default (and maximum) is 16. This is only used when the new PathFinder is enabled.
      */
     maxRooms?: number;
+}
+
+interface FindPathOptsFilteredWithAlgorithm<T> extends FindPathOpts {
+    filter?: LodashStringFilterFor<T>;
+    algorithm?: "astar" | "dijkstra";
 }
 
 interface MoveToOpts extends FindPathOpts {
