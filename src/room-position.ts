@@ -32,7 +32,7 @@ interface RoomPosition extends RoomPositionLike {
      * @param type See Room.find
      * @param opts An object containing pathfinding options (see Room.findPath), or one of the following: filter, algorithm
      */
-    findClosestByPath<T>(type: FIND, opts?: FindPathOptsFilteredWithAlgorithm<T>): T;//TODO: AUTOGENERIC!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    findClosestByPath<TFIND extends FIND>(type: TFIND, opts?: FindPathOptsFilteredWithAlgorithm<FIND_TARGET<TFIND>>): FIND_TARGET<TFIND>;
     /**
      * Find an object with the shortest path from the given position. Uses A* search algorithm and Dijkstra's algorithm.
      * @param objects An array of room's objects or RoomPosition objects that the search should be executed against.
@@ -44,7 +44,7 @@ interface RoomPosition extends RoomPositionLike {
      * @param type See Room.find.
      * @param opts
      */
-    findClosestByRange<T>(type: FIND, opts?: FindOpts<T>): T;//TODO: AUTOGENERIC!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    findClosestByRange<TFIND extends FIND>(type: TFIND, opts?: FindOpts<FIND_TARGET<TFIND>>): FIND_TARGET<TFIND>;
     /**
      * Find an object with the shortest linear distance from the given position.
      * @param objects An array of room's objects or RoomPosition objects that the search should be executed against.
@@ -57,7 +57,7 @@ interface RoomPosition extends RoomPositionLike {
      * @param range The range distance.
      * @param opts See Room.find.
      */
-    findInRange<T extends RoomObjectLike>(type: FIND, range: number, opts?: FindOpts<T>): T[];//TODO: AUTOGENERIC!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    findInRange<TFIND extends FIND>(type: TFIND, range: number, opts?: FindOpts<FIND_TARGET<TFIND>>): FIND_TARGET<TFIND>[];
     /**
      * Find all objects in the specified linear range.
      * @param objects An array of room's objects or RoomPosition objects that the search should be executed against.
@@ -136,8 +136,17 @@ interface RoomPosition extends RoomPositionLike {
      * Get an object with the given type at the specified room position.
      * @param type One of the following string constants: constructionSite, creep, exit, flag, resource, source, structure, terrain
      */
-    lookFor<TLIT extends LOOK, T>(type: LOOK_FOR<TLIT, T>): T[];//Automatic generic parameterization (Order matters!)
-    lookFor<T>(type: LOOK): T[];
+    lookFor<TLOOK extends LOOK>(type: TLOOK): LOOK_TARGET<TLOOK>[];
+}
+
+{
+    //Typing tests
+    function __assert_Find<TFIND extends FIND>(r: RoomPosition, tpe: TFIND): FIND_TARGET<TFIND>[] {
+        return r.findInRange(tpe, Infinity).concat(r.findClosestByPath<TFIND>(tpe));
+    }
+    function __assert_lookFor<TLOOK extends LOOK>(r: RoomPosition, tpe: TLOOK): LOOK_TARGET<TLOOK>[] {
+        return r.lookFor(tpe).concat(r.lookFor<TLOOK>(tpe));
+    }
 }
 
 interface RoomPositionConstructor extends _Constructor<RoomPosition> {

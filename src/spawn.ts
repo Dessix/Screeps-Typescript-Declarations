@@ -2,7 +2,7 @@
 /**
  * Spawns are your colony centers. You can transfer energy into it and create new creeps using createCreep() method.
  */
-interface StructureSpawn extends OwnedStructure {
+interface __StructureSpawn extends OwnedStructure {
     readonly prototype: StructureSpawn;
     /**
      * The amount of energy containing in the spawn.
@@ -15,7 +15,7 @@ interface StructureSpawn extends OwnedStructure {
     /**
      * A shorthand to Memory.spawns[spawn.name]. You can use it for quick access the spawn’s specific memory data object.
      */
-    memory: any;
+    memory?: SpawnMemory;
     /**
      * Spawn’s name. You choose the name upon creating a new spawn, and it cannot be changed later. This name is a hash key to access the spawn via the Game.spawns object.
      */
@@ -47,7 +47,7 @@ interface StructureSpawn extends OwnedStructure {
      * @param name The name of a new creep. It should be unique creep name, i.e. the Game.creeps object should not contain another creep with the same name (hash key). If not defined, a random name will be generated.
      * @param memory The memory of a new creep. If provided, it will be immediately stored into Memory.creeps[name].
      */
-    createCreep(body: BODYPART[], name?: string, memory?: any): string | ERR_NOT_OWNER | ERR_NAME_EXISTS | ERR_BUSY | ERR_NOT_ENOUGH_ENERGY | ERR_INVALID_ARGS | ERR_RCL_NOT_ENOUGH;
+    createCreep(body: BODYPART[], name?: string, memory?: CreepMemory): string | ERR_NOT_OWNER | ERR_NAME_EXISTS | ERR_BUSY | ERR_NOT_ENOUGH_ENERGY | ERR_INVALID_ARGS | ERR_RCL_NOT_ENOUGH;
     /**
      * Kill the creep and drop up to 100% of resources spent on its spawning and boosting depending on remaining life time. The target should be at adjacent square.
      * @param target The target creep object.
@@ -67,6 +67,7 @@ interface StructureSpawn extends OwnedStructure {
     transferEnergy(target: Creep, amount?: number): OK | ERR_NOT_OWNER | ERR_NOT_ENOUGH_RESOURCES | ERR_INVALID_TARGET | ERR_FULL | ERR_NOT_IN_RANGE;
 }
 
+interface StructureSpawn extends __StructureSpawn { }
 
 interface StructureSpawnConstructor extends _Constructor<StructureSpawn>, _ConstructorById<StructureSpawn> {
 }

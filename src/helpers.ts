@@ -62,8 +62,8 @@ interface StoreDefinition {//TODO: AUTOPROPERTY
     readonly power?: number;
 }
 
-interface LookAtResult {//TODO: AUTOPROPERTY
-    type: LOOK;
+interface LookAtResultTyped<TLOOK extends LOOK> {
+    type: TLOOK;
     constructionSite?: ConstructionSite;
     creep?: Creep;
     energy?: Resource;
@@ -75,11 +75,13 @@ interface LookAtResult {//TODO: AUTOPROPERTY
     mineral?: Mineral;
     resource?: Resource;
 }
+interface LookAtResult extends LookAtResultTyped<LOOK> { }
 
-interface LookAtResultWithPos extends LookAtResult {
+interface LookAtResultWithPosTyped<TLOOK extends LOOK> extends LookAtResultTyped<TLOOK> {
     x: number;
     y: number;
 }
+interface LookAtResultWithPos extends LookAtResultWithPosTyped<LOOK> { }
 
 interface SpawningSpec {
     /**
@@ -96,9 +98,12 @@ interface SpawningSpec {
     readonly remainingTime: number;
 };
 
-interface LookAtResultMatrix {
-    [coord: number]: LookAtResultMatrix|LookAtResult[];
+interface LookAtResultMatrixTyped<TLOOK extends LOOK> {
+    [yCoord: number]: {
+        [xCoord: number]: LookAtResultTyped<TLOOK>[];
+    }
 };
+interface LookAtResultMatrix extends LookAtResultMatrixTyped<LOOK> { }
 
 interface FindOpts<T> {
     filter: LodashStringFilterFor<T>;

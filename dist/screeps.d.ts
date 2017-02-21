@@ -37,54 +37,62 @@ declare type ERR_GCL_NOT_ENOUGH = -15;
 declare const ERR_GCL_NOT_ENOUGH: ERR_GCL_NOT_ENOUGH;
 declare type ERRORCODE = (ERR_NOT_OWNER | ERR_NO_PATH | ERR_NAME_EXISTS | ERR_BUSY | ERR_NOT_FOUND | ERR_NOT_ENOUGH_RESOURCES | ERR_NOT_ENOUGH_ENERGY | ERR_INVALID_TARGET | ERR_FULL | ERR_NOT_IN_RANGE | ERR_INVALID_ARGS | ERR_TIRED | ERR_NO_BODYPART | ERR_NOT_ENOUGH_EXTENSIONS | ERR_RCL_NOT_ENOUGH | ERR_GCL_NOT_ENOUGH);
 declare type RETURNCODE = OK | ERRORCODE;
-declare type FIND_EXIT_TOP = 1;
+declare type FIND_EXIT_TOP = "1";
 declare const FIND_EXIT_TOP: FIND_EXIT_TOP;
-declare type FIND_EXIT_RIGHT = 3;
+declare type FIND_EXIT_RIGHT = "3";
 declare const FIND_EXIT_RIGHT: FIND_EXIT_RIGHT;
-declare type FIND_EXIT_BOTTOM = 5;
+declare type FIND_EXIT_BOTTOM = "5";
 declare const FIND_EXIT_BOTTOM: FIND_EXIT_BOTTOM;
-declare type FIND_EXIT_LEFT = 7;
+declare type FIND_EXIT_LEFT = "7";
 declare const FIND_EXIT_LEFT: FIND_EXIT_LEFT;
-declare type FIND_EXIT = 10;
+declare type FIND_EXIT = "10";
 declare const FIND_EXIT: FIND_EXIT;
-declare type FIND_CREEPS = 101;
+declare type FIND_CREEPS = "101";
 declare const FIND_CREEPS: FIND_CREEPS;
-declare type FIND_MY_CREEPS = 102;
+declare type FIND_MY_CREEPS = "102";
 declare const FIND_MY_CREEPS: FIND_MY_CREEPS;
-declare type FIND_HOSTILE_CREEPS = 103;
+declare type FIND_HOSTILE_CREEPS = "103";
 declare const FIND_HOSTILE_CREEPS: FIND_HOSTILE_CREEPS;
-declare type FIND_SOURCES_ACTIVE = 104;
+declare type FIND_SOURCES_ACTIVE = "104";
 declare const FIND_SOURCES_ACTIVE: FIND_SOURCES_ACTIVE;
-declare type FIND_SOURCES = 105;
+declare type FIND_SOURCES = "105";
 declare const FIND_SOURCES: FIND_SOURCES;
-declare type FIND_DROPPED_RESOURCES_OR_ENERGY = 106;
+declare type FIND_DROPPED_RESOURCES_OR_ENERGY = "106";
 declare type FIND_DROPPED_RESOURCES = FIND_DROPPED_RESOURCES_OR_ENERGY;
 declare const FIND_DROPPED_RESOURCES: FIND_DROPPED_RESOURCES;
 declare type FIND_DROPPED_ENERGY = FIND_DROPPED_RESOURCES_OR_ENERGY;
 declare const FIND_DROPPED_ENERGY: FIND_DROPPED_ENERGY;
-declare type FIND_STRUCTURES = 107;
+declare type FIND_STRUCTURES = "107";
 declare const FIND_STRUCTURES: FIND_STRUCTURES;
-declare type FIND_MY_STRUCTURES = 108;
+declare type FIND_MY_STRUCTURES = "108";
 declare const FIND_MY_STRUCTURES: FIND_MY_STRUCTURES;
-declare type FIND_HOSTILE_STRUCTURES = 109;
+declare type FIND_HOSTILE_STRUCTURES = "109";
 declare const FIND_HOSTILE_STRUCTURES: FIND_HOSTILE_STRUCTURES;
-declare type FIND_FLAGS = 110;
+declare type FIND_FLAGS = "110";
 declare const FIND_FLAGS: FIND_FLAGS;
-declare type FIND_CONSTRUCTION_SITES = 111;
+declare type FIND_CONSTRUCTION_SITES = "111";
 declare const FIND_CONSTRUCTION_SITES: FIND_CONSTRUCTION_SITES;
-declare type FIND_MY_SPAWNS = 112;
+declare type FIND_MY_SPAWNS = "112";
 declare const FIND_MY_SPAWNS: FIND_MY_SPAWNS;
-declare type FIND_HOSTILE_SPAWNS = 113;
+declare type FIND_HOSTILE_SPAWNS = "113";
 declare const FIND_HOSTILE_SPAWNS: FIND_HOSTILE_SPAWNS;
-declare type FIND_MY_CONSTRUCTION_SITES = 114;
+declare type FIND_MY_CONSTRUCTION_SITES = "114";
 declare const FIND_MY_CONSTRUCTION_SITES: FIND_MY_CONSTRUCTION_SITES;
-declare type FIND_HOSTILE_CONSTRUCTION_SITES = 115;
+declare type FIND_HOSTILE_CONSTRUCTION_SITES = "115";
 declare const FIND_HOSTILE_CONSTRUCTION_SITES: FIND_HOSTILE_CONSTRUCTION_SITES;
-declare type FIND_MINERALS = 116;
+declare type FIND_MINERALS = "116";
 declare const FIND_MINERALS: FIND_MINERALS;
-declare type FIND_NUKES = 117;
+declare type FIND_NUKES = "117";
 declare const FIND_NUKES: FIND_NUKES;
-declare type FIND = (FIND_EXIT_TOP | FIND_EXIT_RIGHT | FIND_EXIT_BOTTOM | FIND_EXIT_LEFT | FIND_EXIT | FIND_CREEPS | FIND_MY_CREEPS | FIND_HOSTILE_CREEPS | FIND_SOURCES_ACTIVE | FIND_SOURCES | FIND_DROPPED_RESOURCES_OR_ENERGY | FIND_DROPPED_RESOURCES | FIND_DROPPED_ENERGY | FIND_STRUCTURES | FIND_MY_STRUCTURES | FIND_HOSTILE_STRUCTURES | FIND_FLAGS | FIND_CONSTRUCTION_SITES | FIND_MY_SPAWNS | FIND_HOSTILE_SPAWNS | FIND_MY_CONSTRUCTION_SITES | FIND_HOSTILE_CONSTRUCTION_SITES | FIND_MINERALS | FIND_NUKES);
+declare type __MINE = {
+    my: true;
+};
+declare type __HOSTILE = {
+    my: false;
+};
+declare type __FIND_TARGETS = (Record<FIND_EXIT_TOP, RoomPosition> & Record<FIND_EXIT_RIGHT, RoomPosition> & Record<FIND_EXIT_BOTTOM, RoomPosition> & Record<FIND_EXIT_LEFT, RoomPosition> & Record<FIND_EXIT, RoomPosition> & Record<FIND_CREEPS, Creep> & Record<FIND_MY_CREEPS, Creep & __MINE> & Record<FIND_HOSTILE_CREEPS, Creep & __HOSTILE> & Record<FIND_SOURCES_ACTIVE, Source> & Record<FIND_SOURCES, Source> & Record<FIND_DROPPED_RESOURCES_OR_ENERGY, Resource> & Record<FIND_DROPPED_RESOURCES, Resource> & Record<FIND_DROPPED_ENERGY, Resource> & Record<FIND_STRUCTURES, Structure> & Record<FIND_MY_STRUCTURES, Structure & __MINE> & Record<FIND_HOSTILE_STRUCTURES, Structure & __HOSTILE> & Record<FIND_FLAGS, Flag> & Record<FIND_CONSTRUCTION_SITES, ConstructionSite> & Record<FIND_MY_SPAWNS, Spawn & __MINE> & Record<FIND_HOSTILE_SPAWNS, Spawn & __HOSTILE> & Record<FIND_MY_CONSTRUCTION_SITES, ConstructionSite & __MINE> & Record<FIND_HOSTILE_CONSTRUCTION_SITES, ConstructionSite & __HOSTILE> & Record<FIND_MINERALS, Mineral> & Record<FIND_NUKES, Nuke>);
+declare type FIND = keyof __FIND_TARGETS;
+declare type FIND_TARGET<TFIND extends FIND> = __FIND_TARGETS[TFIND];
 declare type TOP = 1;
 declare const TOP: TOP;
 declare type TOP_RIGHT = 2;
@@ -254,6 +262,8 @@ declare type STRUCTURE_WALL = "constructedWall";
 declare const STRUCTURE_WALL: STRUCTURE_WALL;
 declare type CONSTRUCTABLE_STRUCTURE = (STRUCTURE_CONTAINER | STRUCTURE_EXTENSION | STRUCTURE_EXTRACTOR | STRUCTURE_LAB | STRUCTURE_LINK | STRUCTURE_NUKER | STRUCTURE_OBSERVER | STRUCTURE_POWER_SPAWN | STRUCTURE_RAMPART | STRUCTURE_ROAD | STRUCTURE_SPAWN | STRUCTURE_STORAGE | STRUCTURE_TERMINAL | STRUCTURE_TOWER | STRUCTURE_WALL);
 declare type STRUCTURE = CONSTRUCTABLE_STRUCTURE | (STRUCTURE_CONTROLLER | STRUCTURE_KEEPER_LAIR | STRUCTURE_PORTAL | STRUCTURE_POWER_BANK);
+declare type __STRUCTURE_TARGETS = (Record<STRUCTURE_CONTAINER, StructureContainer> & Record<STRUCTURE_CONTROLLER, StructureController> & Record<STRUCTURE_EXTENSION, StructureExtension> & Record<STRUCTURE_EXTRACTOR, StructureExtractor> & Record<STRUCTURE_KEEPER_LAIR, StructureKeeperLair> & Record<STRUCTURE_LAB, StructureLab> & Record<STRUCTURE_LINK, StructureLink> & Record<STRUCTURE_NUKER, StructureNuker> & Record<STRUCTURE_OBSERVER, StructureObserver> & Record<STRUCTURE_PORTAL, StructurePortal> & Record<STRUCTURE_POWER_BANK, StructurePowerBank> & Record<STRUCTURE_POWER_SPAWN, StructurePowerSpawn> & Record<STRUCTURE_RAMPART, StructureRampart> & Record<STRUCTURE_ROAD, StructureRoad> & Record<STRUCTURE_SPAWN, StructureSpawn> & Record<STRUCTURE_STORAGE, StructureStorage> & Record<STRUCTURE_TERMINAL, StructureTerminal> & Record<STRUCTURE_TOWER, StructureTower> & Record<STRUCTURE_WALL, StructureWall>);
+declare type STRUCTURE_TARGET<TSTRUCTURE extends keyof __STRUCTURE_TARGETS> = __STRUCTURE_TARGETS[TSTRUCTURE];
 declare type RESOURCE_ENERGY = "energy";
 declare const RESOURCE_ENERGY: RESOURCE_ENERGY;
 declare type RESOURCE_POWER = "power";
@@ -415,16 +425,16 @@ declare const MINERAL_MIN_AMOUNT: {
 };
 declare const MINERAL_RANDOM_FACTOR: number;
 declare const MINERAL_DENSITY: {
-    1: number;
-    2: number;
-    3: number;
-    4: number;
+    [1]: number;
+    [2]: number;
+    [3]: number;
+    [4]: number;
 };
 declare const MINERAL_DENSITY_PROBABILITY: {
-    1: number;
-    2: number;
-    3: number;
-    4: number;
+    [1]: number;
+    [2]: number;
+    [3]: number;
+    [4]: number;
 };
 declare const MINERAL_DENSITY_CHANGE: number;
 declare const DENSITY_LOW: number;
@@ -447,9 +457,9 @@ declare const NUKER_GHODIUM_CAPACITY: number;
 declare const NUKE_LAND_TIME: number;
 declare const NUKE_RANGE: number;
 declare const NUKE_DAMAGE: {
-    0: number;
-    1: number;
-    4: number;
+    [0]: number;
+    [1]: number;
+    [4]: number;
 };
 declare const REACTIONS: {
     [reagent: string]: {
@@ -463,30 +473,29 @@ declare const BOOSTS: {
         };
     };
 };
-interface LOOK_FOR<Target extends string, TargType> {
-}
-declare type LOOK_FOR_INTER<Target extends string, TargType> = LOOK_FOR<Target, TargType> & Target;
-declare type LOOK_CREEPS = LOOK_FOR_INTER<"creep", Creep>;
+declare type LOOK_CREEPS = "creep";
 declare const LOOK_CREEPS: LOOK_CREEPS;
-declare type LOOK_ENERGY = LOOK_FOR_INTER<"energy", Resource>;
+declare type LOOK_ENERGY = "energy";
 declare const LOOK_ENERGY: LOOK_ENERGY;
-declare type LOOK_RESOURCES = LOOK_FOR_INTER<"resource", Resource>;
+declare type LOOK_RESOURCES = "resource";
 declare const LOOK_RESOURCES: LOOK_RESOURCES;
-declare type LOOK_SOURCES = LOOK_FOR_INTER<"source", Source>;
+declare type LOOK_SOURCES = "source";
 declare const LOOK_SOURCES: LOOK_SOURCES;
-declare type LOOK_MINERALS = LOOK_FOR_INTER<"mineral", Mineral>;
+declare type LOOK_MINERALS = "mineral";
 declare const LOOK_MINERALS: LOOK_MINERALS;
-declare type LOOK_STRUCTURES = LOOK_FOR_INTER<"structure", Structure>;
+declare type LOOK_STRUCTURES = "structure";
 declare const LOOK_STRUCTURES: LOOK_STRUCTURES;
-declare type LOOK_FLAGS = LOOK_FOR_INTER<"flag", Flag>;
+declare type LOOK_FLAGS = "flag";
 declare const LOOK_FLAGS: LOOK_FLAGS;
-declare type LOOK_CONSTRUCTION_SITES = LOOK_FOR_INTER<"constructionSite", ConstructionSite>;
+declare type LOOK_CONSTRUCTION_SITES = "constructionSite";
 declare const LOOK_CONSTRUCTION_SITES: LOOK_CONSTRUCTION_SITES;
-declare type LOOK_NUKES = LOOK_FOR_INTER<"nuke", Nuke>;
+declare type LOOK_NUKES = "nuke";
 declare const LOOK_NUKES: LOOK_NUKES;
-declare type LOOK_TERRAIN = LOOK_FOR_INTER<"terrain", TERRAIN>;
+declare type LOOK_TERRAIN = "terrain";
 declare const LOOK_TERRAIN: LOOK_TERRAIN;
-declare type LOOK = (LOOK_CREEPS | LOOK_ENERGY | LOOK_RESOURCES | LOOK_SOURCES | LOOK_MINERALS | LOOK_STRUCTURES | LOOK_FLAGS | LOOK_CONSTRUCTION_SITES | LOOK_NUKES | LOOK_TERRAIN);
+declare type __LOOK_TARGETS = (Record<LOOK_CREEPS, Creep> & Record<LOOK_ENERGY, Resource> & Record<LOOK_RESOURCES, Resource> & Record<LOOK_SOURCES, Source> & Record<LOOK_MINERALS, Mineral> & Record<LOOK_STRUCTURES, Structure> & Record<LOOK_FLAGS, Flag> & Record<LOOK_CONSTRUCTION_SITES, ConstructionSite> & Record<LOOK_NUKES, Nuke> & Record<LOOK_TERRAIN, TERRAIN>);
+declare type LOOK = keyof __LOOK_TARGETS;
+declare type LOOK_TARGET<TLOOK extends LOOK> = __LOOK_TARGETS[TLOOK];
 declare type ORDER_SELL = "sell";
 declare const ORDER_SELL: ORDER_SELL;
 declare type ORDER_BUY = "buy";
@@ -553,7 +562,7 @@ interface Storage extends StructureStorage {
 /**
  * Creeps are your units. Creeps can move, harvest energy, construct structures, attack another creeps, and perform other actions. Each creep consists of up to 50 body parts with the following possible types: {BODYPART}
  */
-interface Creep extends RoomObject {
+interface __Creep extends RoomObject {
     readonly prototype: Creep;
     /**
      * An array describing the creep’s body. Each element contains the following properties:
@@ -592,7 +601,7 @@ interface Creep extends RoomObject {
     /**
      * A shorthand to Memory.creeps[creep.name]. You can use it for quick access the creep’s specific memory data object.
      */
-    memory: any;
+    memory?: CreepMemory;
     /**
      * Whether it is your creep or foe.
      */
@@ -608,7 +617,7 @@ interface Creep extends RoomObject {
     /**
      * The link to the Room object. Always defined because creeps give visibility into the room they're in.
      */
-    room: Room;
+    readonly room: Room;
     /**
      * Whether this creep is still being spawned.
      */
@@ -777,13 +786,15 @@ interface Creep extends RoomObject {
      */
     withdraw(target: Structure, resourceType: string, amount?: number): OK | ERR_NOT_OWNER | ERR_BUSY | ERR_NOT_ENOUGH_RESOURCES | ERR_INVALID_TARGET | ERR_FULL | ERR_NOT_IN_RANGE | ERR_INVALID_ARGS;
 }
+interface Creep extends __Creep {
+}
 interface CreepConstructor extends _Constructor<Creep>, _ConstructorById<Creep> {
 }
 declare const Creep: CreepConstructor;
 /**
  * A flag. Flags can be used to mark particular spots in a room. Flags are visible to their owners only.
  */
-interface Flag extends RoomObject {
+interface __Flag extends RoomObject {
     readonly prototype: Flag;
     /**
      * Flag color. One of the following constants: COLOR_WHITE, COLOR_GREY, COLOR_RED, COLOR_PURPLE, COLOR_BLUE, COLOR_CYAN, COLOR_GREEN, COLOR_YELLOW, COLOR_ORANGE, COLOR_BROWN
@@ -792,7 +803,7 @@ interface Flag extends RoomObject {
     /**
      * A shorthand to Memory.flags[flag.name]. You can use it for quick access the flag's specific memory data object.
      */
-    memory: any;
+    memory?: FlagMemory;
     /**
      * Flag’s name. You can choose the name while creating a new flag, and it cannot be changed later. This name is a hash key to access the spawn via the Game.flags object.
      */
@@ -826,6 +837,8 @@ interface Flag extends RoomObject {
      * @returns Result Code: OK, ERR_INVALID_TARGET
      */
     setPosition(pos: RoomPosition | RoomObject): OK | ERR_INVALID_TARGET;
+}
+interface Flag extends __Flag {
 }
 interface FlagConstructor extends _Constructor<Flag> {
     new (name: string, color: COLOR, secondaryColor: COLOR, roomName: string, x: number, y: number): Flag;
@@ -960,8 +973,8 @@ interface StoreDefinition {
     readonly energy: number;
     readonly power?: number;
 }
-interface LookAtResult {
-    type: LOOK;
+interface LookAtResultTyped<TLOOK extends LOOK> {
+    type: TLOOK;
     constructionSite?: ConstructionSite;
     creep?: Creep;
     energy?: Resource;
@@ -973,9 +986,13 @@ interface LookAtResult {
     mineral?: Mineral;
     resource?: Resource;
 }
-interface LookAtResultWithPos extends LookAtResult {
+interface LookAtResult extends LookAtResultTyped<LOOK> {
+}
+interface LookAtResultWithPosTyped<TLOOK extends LOOK> extends LookAtResultTyped<TLOOK> {
     x: number;
     y: number;
+}
+interface LookAtResultWithPos extends LookAtResultWithPosTyped<LOOK> {
 }
 interface SpawningSpec {
     /**
@@ -991,8 +1008,12 @@ interface SpawningSpec {
      */
     readonly remainingTime: number;
 }
-interface LookAtResultMatrix {
-    [coord: number]: LookAtResultMatrix | LookAtResult[];
+interface LookAtResultMatrixTyped<TLOOK extends LOOK> {
+    [yCoord: number]: {
+        [xCoord: number]: LookAtResultTyped<TLOOK>[];
+    };
+}
+interface LookAtResultMatrix extends LookAtResultMatrixTyped<LOOK> {
 }
 interface FindOpts<T> {
     filter: LodashStringFilterFor<T>;
@@ -1309,19 +1330,26 @@ interface Order {
     price: number;
 }
 declare type OrderFilter = LodashFilterFor<Order>;
+interface CreepMemory {
+}
+interface FlagMemory {
+}
+interface RoomMemory {
+}
+interface SpawnMemory {
+}
 interface Memory {
-    [name: string]: any;
     creeps: {
-        [name: string]: any;
+        [creepName: string]: CreepMemory | undefined;
     };
     flags: {
-        [name: string]: any;
+        [flagName: string]: FlagMemory | undefined;
     };
     rooms: {
-        [name: string]: any;
+        [roomName: string]: RoomMemory | undefined;
     };
     spawns: {
-        [name: string]: any;
+        [spawnName: string]: SpawnMemory | undefined;
     };
 }
 /**
@@ -1604,7 +1632,7 @@ interface RoomPosition extends RoomPositionLike {
      * @param type See Room.find
      * @param opts An object containing pathfinding options (see Room.findPath), or one of the following: filter, algorithm
      */
-    findClosestByPath<T>(type: FIND, opts?: FindPathOptsFilteredWithAlgorithm<T>): T;
+    findClosestByPath<TFIND extends FIND>(type: TFIND, opts?: FindPathOptsFilteredWithAlgorithm<FIND_TARGET<TFIND>>): FIND_TARGET<TFIND>;
     /**
      * Find an object with the shortest path from the given position. Uses A* search algorithm and Dijkstra's algorithm.
      * @param objects An array of room's objects or RoomPosition objects that the search should be executed against.
@@ -1616,7 +1644,7 @@ interface RoomPosition extends RoomPositionLike {
      * @param type See Room.find.
      * @param opts
      */
-    findClosestByRange<T>(type: FIND, opts?: FindOpts<T>): T;
+    findClosestByRange<TFIND extends FIND>(type: TFIND, opts?: FindOpts<FIND_TARGET<TFIND>>): FIND_TARGET<TFIND>;
     /**
      * Find an object with the shortest linear distance from the given position.
      * @param objects An array of room's objects or RoomPosition objects that the search should be executed against.
@@ -1629,7 +1657,7 @@ interface RoomPosition extends RoomPositionLike {
      * @param range The range distance.
      * @param opts See Room.find.
      */
-    findInRange<T extends RoomObjectLike>(type: FIND, range: number, opts?: FindOpts<T>): T[];
+    findInRange<TFIND extends FIND>(type: TFIND, range: number, opts?: FindOpts<FIND_TARGET<TFIND>>): FIND_TARGET<TFIND>[];
     /**
      * Find all objects in the specified linear range.
      * @param objects An array of room's objects or RoomPosition objects that the search should be executed against.
@@ -1708,8 +1736,7 @@ interface RoomPosition extends RoomPositionLike {
      * Get an object with the given type at the specified room position.
      * @param type One of the following string constants: constructionSite, creep, exit, flag, resource, source, structure, terrain
      */
-    lookFor<TLIT extends LOOK, T>(type: LOOK_FOR<TLIT, T>): T[];
-    lookFor<T>(type: LOOK): T[];
+    lookFor<TLOOK extends LOOK>(type: TLOOK): LOOK_TARGET<TLOOK>[];
 }
 interface RoomPositionConstructor extends _Constructor<RoomPosition> {
     /**
@@ -1811,7 +1838,7 @@ interface TextStyle {
 /**
  * An object representing the room in which your units and structures are in. It can be used to look around, find paths, etc. Every object in the room contains its linked Room instance in the room property.
  */
-interface Room {
+interface __Room {
     readonly prototype: Room;
     /**
      * The name of the room.
@@ -1832,7 +1859,7 @@ interface Room {
     /**
      * A shorthand to Memory.rooms[room.name]. You can use it for quick access the room’s specific memory data object.
      */
-    memory: any;
+    memory?: RoomMemory;
     /**
      * One of the following constants:
      * MODE_SIMULATION, MODE_SURVIVAL, MODE_WORLD, MODE_ARENA
@@ -1888,14 +1915,14 @@ interface Room {
      * @param opts An object with additional options
      * @returns An array with the objects found.
      */
-    find<T>(type: FIND, opts?: FindOpts<T>): T[];
+    find<TFIND extends FIND>(type: TFIND, opts?: FindOpts<FIND_TARGET<TFIND>>): FIND_TARGET<TFIND>[];
     /**
      * Find the exit direction en route to another room.
      * @param room Another room name or room object.
      * @returns The room direction constant, one of the following: FIND_EXIT_TOP, FIND_EXIT_RIGHT, FIND_EXIT_BOTTOM, FIND_EXIT_LEFT
      * Or one of the following error codes: ERR_NO_PATH, ERR_INVALID_ARGS
      */
-    findExitTo(room: string | Room): FIND_EXIT_TOP | FIND_EXIT_RIGHT | FIND_EXIT_BOTTOM | FIND_EXIT_LEFT | ERR_NO_PATH | ERR_INVALID_ARGS;
+    findExitTo(room: (typeof Room.name) | Room): FIND_EXIT_TOP | FIND_EXIT_RIGHT | FIND_EXIT_BOTTOM | FIND_EXIT_LEFT | ERR_NO_PATH | ERR_INVALID_ARGS;
     /**
      * Find an optimal path inside the room between fromPos and toPos using A* search algorithm.
      * @param fromPos The start position.
@@ -1943,14 +1970,14 @@ interface Room {
      * @param y The Y position.
      * @returns An array of objects of the given type at the specified position if found.
      */
-    lookForAt<T>(type: LOOK, x: number, y: number): T[];
+    lookForAt<TLOOK extends LOOK>(type: TLOOK, x: number, y: number): LOOK_TARGET<TLOOK>[];
     /**
      * Get an object with the given type at the specified room position.
      * @param type One of the following string constants: constructionSite, creep, energy, exit, flag, source, structure, terrain
      * @param target Can be a RoomPosition object or any object containing RoomPosition.
      * @returns An array of objects of the given type at the specified position if found.
      */
-    lookForAt<T>(type: LOOK, target: RoomPositionLike | RoomObjectLike): T[];
+    lookForAt<TLOOK extends LOOK>(type: TLOOK, target: RoomPositionLike | RoomObjectLike): LOOK_TARGET<TLOOK>[];
     /**
      * Get the list of objects with the given type at the specified room area. This method is more CPU efficient in comparison to multiple lookForAt calls.
      * @param type One of the following string constants: constructionSite, creep, energy, exit, flag, source, structure, terrain
@@ -1960,12 +1987,14 @@ interface Room {
      * @param right The right X boundary of the area.
      * @returns An object with all the objects of the given type in the specified area
      */
-    lookForAtArea(type: LOOK, top: number, left: number, bottom: number, right: number): LookAtResultMatrix;
-    lookForAtArea(type: LOOK, top: number, left: number, bottom: number, right: number, asArray: false): LookAtResultMatrix;
-    lookForAtArea(type: LOOK, top: number, left: number, bottom: number, right: number, asArray: true): LookAtResultWithPos[];
+    lookForAtArea<TLOOK extends LOOK>(type: TLOOK, top: number, left: number, bottom: number, right: number): LookAtResultMatrixTyped<TLOOK>;
+    lookForAtArea<TLOOK extends LOOK>(type: TLOOK, top: number, left: number, bottom: number, right: number, asArray: false): LookAtResultMatrixTyped<TLOOK>;
+    lookForAtArea<TLOOK extends LOOK>(type: TLOOK, top: number, left: number, bottom: number, right: number, asArray: true): LookAtResultWithPosTyped<TLOOK>[];
+}
+interface Room extends __Room {
 }
 interface RoomConstructor {
-    new (id: string): Room;
+    new (id: (typeof Room.name)): Room;
     serializePath(path: PathStep[]): string;
     deserializePath(path: string): PathStep[];
 }
@@ -2006,7 +2035,7 @@ declare const Source: SourceConstructor;
 /**
  * Spawns are your colony centers. You can transfer energy into it and create new creeps using createCreep() method.
  */
-interface StructureSpawn extends OwnedStructure {
+interface __StructureSpawn extends OwnedStructure {
     readonly prototype: StructureSpawn;
     /**
      * The amount of energy containing in the spawn.
@@ -2019,7 +2048,7 @@ interface StructureSpawn extends OwnedStructure {
     /**
      * A shorthand to Memory.spawns[spawn.name]. You can use it for quick access the spawn’s specific memory data object.
      */
-    memory: any;
+    memory?: SpawnMemory;
     /**
      * Spawn’s name. You choose the name upon creating a new spawn, and it cannot be changed later. This name is a hash key to access the spawn via the Game.spawns object.
      */
@@ -2050,7 +2079,7 @@ interface StructureSpawn extends OwnedStructure {
      * @param name The name of a new creep. It should be unique creep name, i.e. the Game.creeps object should not contain another creep with the same name (hash key). If not defined, a random name will be generated.
      * @param memory The memory of a new creep. If provided, it will be immediately stored into Memory.creeps[name].
      */
-    createCreep(body: BODYPART[], name?: string, memory?: any): string | ERR_NOT_OWNER | ERR_NAME_EXISTS | ERR_BUSY | ERR_NOT_ENOUGH_ENERGY | ERR_INVALID_ARGS | ERR_RCL_NOT_ENOUGH;
+    createCreep(body: BODYPART[], name?: string, memory?: CreepMemory): string | ERR_NOT_OWNER | ERR_NAME_EXISTS | ERR_BUSY | ERR_NOT_ENOUGH_ENERGY | ERR_INVALID_ARGS | ERR_RCL_NOT_ENOUGH;
     /**
      * Kill the creep and drop up to 100% of resources spent on its spawning and boosting depending on remaining life time. The target should be at adjacent square.
      * @param target The target creep object.
@@ -2068,6 +2097,8 @@ interface StructureSpawn extends OwnedStructure {
      * @param amount The amount of energy to be transferred. If omitted, all the remaining amount of energy will be used.
      */
     transferEnergy(target: Creep, amount?: number): OK | ERR_NOT_OWNER | ERR_NOT_ENOUGH_RESOURCES | ERR_INVALID_TARGET | ERR_FULL | ERR_NOT_IN_RANGE;
+}
+interface StructureSpawn extends __StructureSpawn {
 }
 interface StructureSpawnConstructor extends _Constructor<StructureSpawn>, _ConstructorById<StructureSpawn> {
 }

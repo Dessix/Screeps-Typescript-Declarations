@@ -1,7 +1,11 @@
+interface CreepMemory { }
+interface FlagMemory { }
+interface RoomMemory { }
+interface SpawnMemory { }
+
 interface Memory {
-    [name: string]: any;
-    creeps: {[name: string]: any};
-    flags: {[name: string]: any};
-    rooms: {[name: string]: any};
-    spawns: {[name: string]: any};
+    creeps: { [creepName: string]: CreepMemory | undefined };
+    flags: { [flagName: string]: FlagMemory | undefined };
+    rooms: { [roomName: string]: RoomMemory | undefined };
+    spawns: { [spawnName: string]: SpawnMemory | undefined };
 }
