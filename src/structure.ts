@@ -17,6 +17,11 @@ interface Structure extends RoomObject {
      */
     readonly hitsMax: number;
     /**
+     * If you can get an instance of a Structure, you can see it.
+     * If you can see the Structure, you can see the room it's in.
+     */
+    room: Room;
+    /**
      * One of the STRUCTURE_* constants.
      */
     readonly structureType: STRUCTURE;
@@ -54,7 +59,10 @@ interface OwnedStructure extends Structure {
      * The structure’s owner info
      */
     readonly owner: Owner;
-
+    /**
+     * The link to the Room object. Is always present because owned structures give visibility.
+     */
+    room: Room;
 }
 
 interface OwnedStructureConstructor extends _Constructor<OwnedStructure>, _ConstructorById<OwnedStructure> {
@@ -593,15 +601,15 @@ interface StructureNuker extends OwnedStructure {
      */
     readonly energyCapacity: number;
     /**
-     * The amount of energy contained in this structure.
+     * The amount of ghodium contained in this structure.
      */
     readonly ghodium: number;
     /**
-     * The total amount of energy this structure can contain.
+     * The total amount of ghodium this structure can contain.
      */
     readonly ghodiumCapacity: number;
     /**
-     * The amount of game ticks the link has to wait until the next transfer is possible.
+     * The amount of game ticks the nuker has to wait until the next launch is possible.
      */
     readonly cooldown: number;
     /**

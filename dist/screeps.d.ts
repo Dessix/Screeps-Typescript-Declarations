@@ -555,6 +555,10 @@ interface Creep extends RoomObject {
      */
     readonly owner: Owner;
     /**
+     * The link to the Room object. Always defined because creeps give visibility into the room they're in.
+     */
+    room: Room;
+    /**
      * Whether this creep is still being spawned.
      */
     readonly spawning: boolean;
@@ -1010,6 +1014,10 @@ interface FindPathOpts {
      * The maximum allowed rooms to search. The default (and maximum) is 16. This is only used when the new PathFinder is enabled.
      */
     maxRooms?: number;
+    /**
+     * Path to within (range) tiles of target tile. The default is to path to the tile that the target is on (0).
+     */
+    range?: number;
 }
 interface MoveToOpts extends FindPathOpts {
     /**
@@ -1029,6 +1037,10 @@ interface MoveToOpts extends FindPathOpts {
      * significantly save CPU time in some cases. The default value is false.
      */
     noPathFinding?: boolean;
+    /**
+     * Draw a line along the creep’s path using RoomVisual.poly. You can provide either an empty object or custom style parameters.
+     */
+    visualizePathStyle?: PolyStyle;
 }
 interface PathStep {
     x: number;
@@ -1454,6 +1466,11 @@ interface CostMatrix {
  */
 interface RawMemory {
     /**
+     * An object with asynchronous memory segments available on this tick. Each object key is the segment ID with data in string values.
+     * Use RawMemory.setActiveSegments to fetch segments on the next tick. Segments data is saved automatically in the end of the tick.
+     */
+    segments: string[];
+    /**
      * Get a raw string representation of the Memory object.
      */
     get(): string;
@@ -1462,6 +1479,11 @@ interface RawMemory {
      * @param value New memory value as a string.
      */
     set(value: string): void;
+    /**
+     * Request memory segments using the list of their IDs. Memory segments will become available on the next tick in RawMemory.segments object.
+     * @param ids An array of segment IDs. Each ID should be a number from 0 to 99. Maximum 10 segments can be active at the same time. Subsequent calls of setActiveSegments override previous ones.
+     */
+    setActiveSegments(ids: number[]): void;
 }
 /**
  * A dropped piece of resource. It will decay after a while if not picked up. Dropped resource pile decays for ceil(amount/1000) units per tick.
@@ -1737,26 +1759,26 @@ declare class RoomVisual {
     getSize(): number;
 }
 interface LineStyle {
-    width: number;
-    color: string;
-    opacity: number;
-    lineStyle: undefined | "dashed" | "dotted";
+    width?: number;
+    color?: string;
+    opacity?: number;
+    lineStyle?: "dashed" | "dotted";
 }
 interface PolyStyle {
-    fill: string;
-    opacity: number;
-    stroke: string | undefined;
-    strokeWidth: number;
-    lineStyle: undefined | "dashed" | "dotted";
+    fill?: string;
+    opacity?: number;
+    stroke?: string | undefined;
+    strokeWidth?: number;
+    lineStyle?: "dashed" | "dotted";
 }
 interface CircleStyle extends PolyStyle {
-    radius: number;
+    radius?: number;
 }
 interface TextStyle {
-    color: string;
-    size: number;
-    align: "center" | "left" | "right";
-    opacity: number;
+    color?: string;
+    size?: number;
+    align?: "center" | "left" | "right";
+    opacity?: number;
 }
 /**
  * An object representing the room in which your units and structures are in. It can be used to look around, find paths, etc. Every object in the room contains its linked Room instance in the room property.
@@ -1937,6 +1959,11 @@ interface Source extends RoomObject {
      */
     readonly energyCapacity: number;
     /**
+     * If you can get an instance of Source, you can see it.
+     * If you can see a Source, you can see the room it's in.
+     */
+    room: Room;
+    /**
      * The remaining time after which the source will be refilled.
      */
     readonly ticksToRegeneration: number;
@@ -2031,6 +2058,11 @@ interface Structure extends RoomObject {
      */
     readonly hitsMax: number;
     /**
+     * If you can get an instance of a Structure, you can see it.
+     * If you can see the Structure, you can see the room it's in.
+     */
+    room: Room;
+    /**
      * One of the STRUCTURE_* constants.
      */
     readonly structureType: STRUCTURE;
@@ -2065,6 +2097,10 @@ interface OwnedStructure extends Structure {
      * The structure’s owner info
      */
     readonly owner: Owner;
+    /**
+     * The link to the Room object. Is always present because owned structures give visibility.
+     */
+    room: Room;
 }
 interface OwnedStructureConstructor extends _Constructor<OwnedStructure>, _ConstructorById<OwnedStructure> {
 }

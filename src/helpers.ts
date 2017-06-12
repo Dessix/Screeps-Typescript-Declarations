@@ -177,6 +177,11 @@ interface FindPathOpts {
      * The maximum allowed rooms to search. The default (and maximum) is 16. This is only used when the new PathFinder is enabled.
      */
     maxRooms?: number;
+
+    /**
+     * Path to within (range) tiles of target tile. The default is to path to the tile that the target is on (0).
+     */
+    range?: number;
 }
 
 interface MoveToOpts extends FindPathOpts {
@@ -199,6 +204,11 @@ interface MoveToOpts extends FindPathOpts {
      * significantly save CPU time in some cases. The default value is false.
      */
     noPathFinding?: boolean;
+
+    /**
+     * Draw a line along the creep’s path using RoomVisual.poly. You can provide either an empty object or custom style parameters.
+     */
+    visualizePathStyle?: PolyStyle;
 };
 
 interface PathStep {
