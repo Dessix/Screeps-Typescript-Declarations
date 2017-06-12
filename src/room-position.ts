@@ -1,7 +1,25 @@
+interface PointLike {
+  x: number;
+  y: number;
+}
+interface RoomPositionLike extends PointLike {
+    /**
+     * The name of the room.
+     */
+    roomName: string;
+    /**
+     * X position in the room.
+     */
+    x: number;
+    /**
+     * Y position in the room.
+     */
+    y: number;
+}
 /**
  * An object representing the specified position in the room. Every object in the room contains RoomPosition as the pos property. The position object of a custom location can be obtained using the Room.getPositionAt() method or using the constructor.
  */
-interface RoomPosition {
+interface RoomPosition extends RoomPositionLike {
     readonly prototype: RoomPosition;
     /**
      * The name of the room.

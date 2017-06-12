@@ -37,6 +37,16 @@ declare type ERR_GCL_NOT_ENOUGH = -15;
 declare const ERR_GCL_NOT_ENOUGH: ERR_GCL_NOT_ENOUGH;
 declare type ERRORCODE = (ERR_NOT_OWNER | ERR_NO_PATH | ERR_NAME_EXISTS | ERR_BUSY | ERR_NOT_FOUND | ERR_NOT_ENOUGH_RESOURCES | ERR_NOT_ENOUGH_ENERGY | ERR_INVALID_TARGET | ERR_FULL | ERR_NOT_IN_RANGE | ERR_INVALID_ARGS | ERR_TIRED | ERR_NO_BODYPART | ERR_NOT_ENOUGH_EXTENSIONS | ERR_RCL_NOT_ENOUGH | ERR_GCL_NOT_ENOUGH);
 declare type RETURNCODE = OK | ERRORCODE;
+declare class __ID<T> {
+    private __INTERNAL;
+}
+declare type IdFor<T> = string & __ID<T>;
+declare type __MINE = {
+    my: true;
+};
+declare type __HOSTILE = {
+    my: false;
+};
 declare type FIND_EXIT_TOP = 1;
 declare const FIND_EXIT_TOP: FIND_EXIT_TOP;
 declare type FIND_EXIT_RIGHT = 3;
@@ -47,44 +57,47 @@ declare type FIND_EXIT_LEFT = 7;
 declare const FIND_EXIT_LEFT: FIND_EXIT_LEFT;
 declare type FIND_EXIT = 10;
 declare const FIND_EXIT: FIND_EXIT;
-declare type FIND_CREEPS = 101;
+declare type FIND_CREEPS = 101 & string;
 declare const FIND_CREEPS: FIND_CREEPS;
-declare type FIND_MY_CREEPS = 102;
+declare type FIND_MY_CREEPS = 102 & string;
 declare const FIND_MY_CREEPS: FIND_MY_CREEPS;
-declare type FIND_HOSTILE_CREEPS = 103;
+declare type FIND_HOSTILE_CREEPS = 103 & string;
 declare const FIND_HOSTILE_CREEPS: FIND_HOSTILE_CREEPS;
-declare type FIND_SOURCES_ACTIVE = 104;
+declare type FIND_SOURCES_ACTIVE = 104 & string;
 declare const FIND_SOURCES_ACTIVE: FIND_SOURCES_ACTIVE;
-declare type FIND_SOURCES = 105;
+declare type FIND_SOURCES = 105 & string;
 declare const FIND_SOURCES: FIND_SOURCES;
-declare type FIND_DROPPED_RESOURCES_OR_ENERGY = 106;
-declare type FIND_DROPPED_RESOURCES = FIND_DROPPED_RESOURCES_OR_ENERGY;
+declare type FIND_DROPPED_RESOURCES_OR_ENERGY = 106 & string;
+declare type FIND_DROPPED_RESOURCES = FIND_DROPPED_RESOURCES_OR_ENERGY & string;
 declare const FIND_DROPPED_RESOURCES: FIND_DROPPED_RESOURCES;
-declare type FIND_DROPPED_ENERGY = FIND_DROPPED_RESOURCES_OR_ENERGY;
+declare type FIND_DROPPED_ENERGY = FIND_DROPPED_RESOURCES_OR_ENERGY & string;
 declare const FIND_DROPPED_ENERGY: FIND_DROPPED_ENERGY;
-declare type FIND_STRUCTURES = 107;
+declare type FIND_STRUCTURES = 107 & string;
 declare const FIND_STRUCTURES: FIND_STRUCTURES;
-declare type FIND_MY_STRUCTURES = 108;
+declare type FIND_MY_STRUCTURES = 108 & string;
 declare const FIND_MY_STRUCTURES: FIND_MY_STRUCTURES;
-declare type FIND_HOSTILE_STRUCTURES = 109;
+declare type FIND_HOSTILE_STRUCTURES = 109 & string;
 declare const FIND_HOSTILE_STRUCTURES: FIND_HOSTILE_STRUCTURES;
-declare type FIND_FLAGS = 110;
+declare type FIND_FLAGS = 110 & string;
 declare const FIND_FLAGS: FIND_FLAGS;
-declare type FIND_CONSTRUCTION_SITES = 111;
+declare type FIND_CONSTRUCTION_SITES = 111 & string;
 declare const FIND_CONSTRUCTION_SITES: FIND_CONSTRUCTION_SITES;
-declare type FIND_MY_SPAWNS = 112;
+declare type FIND_MY_SPAWNS = 112 & string;
 declare const FIND_MY_SPAWNS: FIND_MY_SPAWNS;
-declare type FIND_HOSTILE_SPAWNS = 113;
+declare type FIND_HOSTILE_SPAWNS = 113 & string;
 declare const FIND_HOSTILE_SPAWNS: FIND_HOSTILE_SPAWNS;
-declare type FIND_MY_CONSTRUCTION_SITES = 114;
+declare type FIND_MY_CONSTRUCTION_SITES = 114 & string;
 declare const FIND_MY_CONSTRUCTION_SITES: FIND_MY_CONSTRUCTION_SITES;
-declare type FIND_HOSTILE_CONSTRUCTION_SITES = 115;
+declare type FIND_HOSTILE_CONSTRUCTION_SITES = 115 & string;
 declare const FIND_HOSTILE_CONSTRUCTION_SITES: FIND_HOSTILE_CONSTRUCTION_SITES;
-declare type FIND_MINERALS = 116;
+declare type FIND_MINERALS = 116 & string;
 declare const FIND_MINERALS: FIND_MINERALS;
-declare type FIND_NUKES = 117;
+declare type FIND_NUKES = 117 & string;
 declare const FIND_NUKES: FIND_NUKES;
 declare type FIND = (FIND_EXIT_TOP | FIND_EXIT_RIGHT | FIND_EXIT_BOTTOM | FIND_EXIT_LEFT | FIND_EXIT | FIND_CREEPS | FIND_MY_CREEPS | FIND_HOSTILE_CREEPS | FIND_SOURCES_ACTIVE | FIND_SOURCES | FIND_DROPPED_RESOURCES_OR_ENERGY | FIND_DROPPED_RESOURCES | FIND_DROPPED_ENERGY | FIND_STRUCTURES | FIND_MY_STRUCTURES | FIND_HOSTILE_STRUCTURES | FIND_FLAGS | FIND_CONSTRUCTION_SITES | FIND_MY_SPAWNS | FIND_HOSTILE_SPAWNS | FIND_MY_CONSTRUCTION_SITES | FIND_HOSTILE_CONSTRUCTION_SITES | FIND_MINERALS | FIND_NUKES);
+declare type __TARGETKEYS_FIND = (Record<FIND_CREEPS, Creep> & Record<FIND_MY_CREEPS, Creep & __MINE> & Record<FIND_HOSTILE_CREEPS, Creep & __HOSTILE> & Record<FIND_SOURCES_ACTIVE, Source> & Record<FIND_SOURCES, Source> & Record<FIND_DROPPED_RESOURCES_OR_ENERGY, Resource> & Record<FIND_DROPPED_RESOURCES, Resource> & Record<FIND_DROPPED_ENERGY, Resource & {
+    resourceType: typeof RESOURCE_ENERGY;
+}> & Record<FIND_STRUCTURES, Structure> & Record<FIND_MY_STRUCTURES, Structure & __MINE> & Record<FIND_HOSTILE_STRUCTURES, Structure & __HOSTILE> & Record<FIND_FLAGS, Flag> & Record<FIND_CONSTRUCTION_SITES, ConstructionSite> & Record<FIND_MY_SPAWNS, Spawn & __MINE> & Record<FIND_HOSTILE_SPAWNS, Spawn & __HOSTILE> & Record<FIND_MY_CONSTRUCTION_SITES, ConstructionSite & __MINE> & Record<FIND_HOSTILE_CONSTRUCTION_SITES, ConstructionSite & __HOSTILE> & Record<FIND_MINERALS, Mineral> & Record<FIND_NUKES, Nuke>);
 declare type TOP = 1;
 declare const TOP: TOP;
 declare type TOP_RIGHT = 2;
@@ -297,7 +310,8 @@ declare const RESOURCE_CATALYZED_ZYNTHIUM_ACID: "XZH2O";
 declare const RESOURCE_CATALYZED_ZYNTHIUM_ALKALIDE: "ZXHO2";
 declare const RESOURCE_CATALYZED_GHODIUM_ACID: "XGH2O";
 declare const RESOURCE_CATALYZED_GHODIUM_ALKALIDE: "XGHO2";
-declare const RESOURCES_ALL: string[];
+declare type RESOURCE = (typeof RESOURCE_ENERGY | typeof RESOURCE_POWER | typeof RESOURCE_UTRIUM | typeof RESOURCE_LEMERGIUM | typeof RESOURCE_KEANIUM | typeof RESOURCE_GHODIUM | typeof RESOURCE_ZYNTHIUM | typeof RESOURCE_OXYGEN | typeof RESOURCE_HYDROGEN | typeof RESOURCE_CATALYST | typeof RESOURCE_HYDROXIDE | typeof RESOURCE_ZYNTHIUM_KEANITE | typeof RESOURCE_UTRIUM_LEMERGITE | typeof RESOURCE_UTRIUM_HYDRIDE | typeof RESOURCE_UTRIUM_OXIDE | typeof RESOURCE_KEANIUM_HYDRIDE | typeof RESOURCE_KEANIUM_OXIDE | typeof RESOURCE_LEMERGIUM_HYDRIDE | typeof RESOURCE_LEMERGIUM_OXIDE | typeof RESOURCE_ZYNTHIUM_HYDRIDE | typeof RESOURCE_ZYNTHIUM_OXIDE | typeof RESOURCE_GHODIUM_HYDRIDE | typeof RESOURCE_GHODIUM_OXIDE | typeof RESOURCE_UTRIUM_ACID | typeof RESOURCE_UTRIUM_ALKALIDE | typeof RESOURCE_KEANIUM_ACID | typeof RESOURCE_KEANIUM_ALKALIDE | typeof RESOURCE_LEMERGIUM_ACID | typeof RESOURCE_LEMERGIUM_ALKALIDE | typeof RESOURCE_ZYNTHIUM_ACID | typeof RESOURCE_ZYNTHIUM_ALKALIDE | typeof RESOURCE_GHODIUM_ACID | typeof RESOURCE_GHODIUM_ALKALIDE | typeof RESOURCE_CATALYZED_UTRIUM_ACID | typeof RESOURCE_CATALYZED_UTRIUM_ALKALIDE | typeof RESOURCE_CATALYZED_KEANIUM_ACID | typeof RESOURCE_CATALYZED_KEANIUM_ALKALIDE | typeof RESOURCE_CATALYZED_LEMERGIUM_ACID | typeof RESOURCE_CATALYZED_LEMERGIUM_ALKALIDE | typeof RESOURCE_CATALYZED_ZYNTHIUM_ACID | typeof RESOURCE_CATALYZED_ZYNTHIUM_ALKALIDE | typeof RESOURCE_CATALYZED_GHODIUM_ACID | typeof RESOURCE_CATALYZED_GHODIUM_ALKALIDE);
+declare const RESOURCES_ALL: RESOURCE[];
 declare const SUBSCRIPTION_TOKEN: string;
 declare const CONTROLLER_LEVELS: {
     [level: number]: number;
@@ -439,6 +453,9 @@ declare const LOOK_NUKES: LOOK_NUKES;
 declare type LOOK_TERRAIN = "terrain";
 declare const LOOK_TERRAIN: LOOK_TERRAIN;
 declare type LOOK = (LOOK_CREEPS | LOOK_ENERGY | LOOK_RESOURCES | LOOK_SOURCES | LOOK_MINERALS | LOOK_STRUCTURES | LOOK_FLAGS | LOOK_CONSTRUCTION_SITES | LOOK_NUKES | LOOK_TERRAIN);
+declare type __TARGETKEYS_LOOK = (Record<LOOK_CREEPS, Creep> & Record<LOOK_ENERGY, Resource & {
+    resourceType: typeof RESOURCE_ENERGY;
+}> & Record<LOOK_RESOURCES, Resource> & Record<LOOK_SOURCES, Source> & Record<LOOK_MINERALS, Mineral> & Record<LOOK_STRUCTURES, Structure> & Record<LOOK_FLAGS, Flag> & Record<LOOK_CONSTRUCTION_SITES, ConstructionSite> & Record<LOOK_NUKES, Nuke>);
 declare const ORDER_SELL: "sell";
 declare const ORDER_BUY: "buy";
 /**
@@ -1501,7 +1518,7 @@ interface Resource extends RoomObject {
     /**
      * One of the `RESOURCE_*` constants.
      */
-    readonly resourceType: string;
+    readonly resourceType: RESOURCE;
 }
 interface ResourceConstructor {
     new (id: string): Resource;
@@ -1529,10 +1546,28 @@ interface RoomObjectConstructor extends _Constructor<RoomObject> {
     (x: number, y: number, roomName: string): RoomObject;
 }
 declare const RoomObject: RoomObjectConstructor;
+interface PointLike {
+    x: number;
+    y: number;
+}
+interface RoomPositionLike extends PointLike {
+    /**
+     * The name of the room.
+     */
+    roomName: string;
+    /**
+     * X position in the room.
+     */
+    x: number;
+    /**
+     * Y position in the room.
+     */
+    y: number;
+}
 /**
  * An object representing the specified position in the room. Every object in the room contains RoomPosition as the pos property. The position object of a custom location can be obtained using the Room.getPositionAt() method or using the constructor.
  */
-interface RoomPosition {
+interface RoomPosition extends RoomPositionLike {
     readonly prototype: RoomPosition;
     /**
      * The name of the room.
