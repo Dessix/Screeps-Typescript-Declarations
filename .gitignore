@@ -1,4 +1,6 @@
 .idea
+.projectile
+.vscode
 node_modules
 dist/screeps.ts
 npm-debug.log
