@@ -435,7 +435,7 @@ declare type RESOURCE = (
 );
 declare const RESOURCES_ALL: RESOURCE[];
 
-declare const SUBSCRIPTION_TOKEN: string;
+declare const SUBSCRIPTION_TOKEN: "token";
 
 declare const CONTROLLER_LEVELS: {[level: number]: number};
 declare const CONTROLLER_STRUCTURES: {[structure: string]: {[level: number]: number}};
@@ -492,10 +492,6 @@ declare const MODE_ARENA: string;
 declare type TERRAIN_PLAIN = "plain";
 declare type TERRAIN_SWAMP = "swamp";
 declare type TERRAIN_WALL = "wall";
-
-declare const TERRAIN_MASK_WALL: number;
-declare const TERRAIN_MASK_SWAMP: number;
-declare const TERRAIN_MASK_LAVA: number;
 declare type TERRAIN = (
     | TERRAIN_PLAIN
     | TERRAIN_SWAMP
@@ -514,22 +510,20 @@ declare const MINERAL_MIN_AMOUNT: {
     Z: number,
     U: number,
     X: number
-}
+};
 declare const MINERAL_RANDOM_FACTOR: number;
-
-
 declare const MINERAL_DENSITY: {
-        1: number,
-        2: number,
-        3: number,
-        4: number
-}
+    [1]: number,
+    [2]: number,
+    [3]: number,
+    [4]: number
+};
 declare const MINERAL_DENSITY_PROBABILITY: {
-        1: number,
-        2: number,
-        3: number,
-        4: number
-}
+    [1]: number,
+    [2]: number,
+    [3]: number,
+    [4]: number
+};
 declare const MINERAL_DENSITY_CHANGE: number;
 
 declare const DENSITY_LOW: number;
@@ -555,24 +549,24 @@ declare const NUKER_GHODIUM_CAPACITY: number;
 declare const NUKE_LAND_TIME: number;
 declare const NUKE_RANGE: number;
 declare const NUKE_DAMAGE: {
-    0: number,
-    1: number,
-    4: number
-}
+    [0]: number;
+    [1]: number;
+    [4]: number;
+};
 
 declare const REACTIONS: {
     [reagent: string]: {
-        [reagent: string]: string
-    }
-}
+        [reagent: string]: string;
+    };
+};
 
 declare const BOOSTS: {
     [part: string]: {
         [boost: string]: {
-            [action: string]: number
-        }
-    }
-}
+            [action: string]: number;
+        };
+    };
+};
 
 declare type LOOK_CREEPS = "creep"; declare const LOOK_CREEPS: LOOK_CREEPS;
 declare type LOOK_ENERGY = "energy"; declare const LOOK_ENERGY: LOOK_ENERGY;
@@ -600,5 +594,9 @@ declare type __TARGETKEYS_LOOK = (
 declare type LOOK = keyof __TARGETKEYS_LOOK;
 declare type __TARGET_LOOK<TLOOK extends LOOK> = __TARGETKEYS_LOOK[TLOOK];
 
-declare const ORDER_SELL: "sell";
-declare const ORDER_BUY: "buy";
+declare type ORDER_SELL = "sell"; declare const ORDER_SELL: ORDER_SELL;
+declare type ORDER_BUY = "buy"; declare const ORDER_BUY: ORDER_BUY;
+declare type ORDER = (
+    | ORDER_SELL
+    | ORDER_BUY
+);

@@ -44,45 +44,45 @@ interface RoomPosition extends RoomPositionLike {
      * @param color The color of a new flag. Should be one of the COLOR_* constants
      * @param secondaryColor The secondary color of a new flag. Should be one of the COLOR_* constants. The default value is equal to color.
      */
-    createFlag(name?: string, color?: COLOR, secondaryColor?: COLOR): string | ERR_NAME_EXISTS | ERR_INVALID_ARGS;
+    createFlag<FlagName extends string>(name?: FlagName, color?: COLOR, secondaryColor?: COLOR): FlagName | ERR_NAME_EXISTS | ERR_INVALID_ARGS;
     /**
      * Find an object with the shortest path from the given position. Uses A* search algorithm and Dijkstra's algorithm.
      * @param type See Room.find
      * @param opts An object containing pathfinding options (see Room.findPath), or one of the following: filter, algorithm
      */
-    findClosestByPath<T>(type: number, opts?: FindPathOpts & { filter?: any | string, algorithm?: string }): T;
+    findClosestByPath<TFIND extends FIND>(type: TFIND, opts?: FindPathOptsFilteredWithAlgorithm<__TARGET_FIND<TFIND>>): __TARGET_FIND<TFIND>;
     /**
      * Find an object with the shortest path from the given position. Uses A* search algorithm and Dijkstra's algorithm.
      * @param objects An array of room's objects or RoomPosition objects that the search should be executed against.
      * @param opts An object containing pathfinding options (see Room.findPath), or one of the following: filter, algorithm
      */
-    findClosestByPath<T>(objects: T[] | RoomPosition[], opts?: FindPathOpts & { filter?: any | string, algorithm?: string }): T;
+    findClosestByPath<T extends RoomObjectLike>(objects: T[] | RoomPosition[], opts?: FindPathOptsFilteredWithAlgorithm<T>): T;
     /**
      * Find an object with the shortest linear distance from the given position.
      * @param type See Room.find.
      * @param opts
      */
-    findClosestByRange<T>(type: number, opts?: { filter: any | string }): T;
+    findClosestByRange<TFIND extends FIND>(type: TFIND, opts?: FindOpts<__TARGET_FIND<TFIND>>): __TARGET_FIND<TFIND>;
     /**
      * Find an object with the shortest linear distance from the given position.
      * @param objects An array of room's objects or RoomPosition objects that the search should be executed against.
      * @param opts An object containing one of the following options: filter
      */
-    findClosestByRange<T>(objects: T[] | RoomPosition[], opts?: { filter: any | string }): T;
+    findClosestByRange<T extends RoomObjectLike>(objects: T[] | RoomPosition[], opts?: FindOpts<T>): T;
     /**
      * Find all objects in the specified linear range.
      * @param type See Room.find.
      * @param range The range distance.
      * @param opts See Room.find.
      */
-    findInRange<T>(type: number, range: number, opts?: { filter?: any | string }): T[];
+    findInRange<TFIND extends FIND>(type: TFIND, range: number, opts?: FindOpts<__TARGET_FIND<TFIND>>): __TARGET_FIND<TFIND>[];
     /**
      * Find all objects in the specified linear range.
      * @param objects An array of room's objects or RoomPosition objects that the search should be executed against.
      * @param range The range distance.
      * @param opts See Room.find.
      */
-    findInRange<T>(objects: T[] | RoomPosition[], range: number, opts?: { filter?: any | string }): T[];
+    findInRange<T extends RoomObjectLike>(objects: T[] | RoomPosition[], range: number, opts?: FindOpts<T>): T[];
     /**
      * Find an optimal path to the specified position using A* search algorithm. This method is a shorthand for Room.findPath. If the target is in another room, then the corresponding exit will be used as a target.
      * @param x X position in the room.
@@ -95,7 +95,7 @@ interface RoomPosition extends RoomPositionLike {
      * @param target Can be a RoomPosition object or any object containing RoomPosition.
      * @param opts An object containing pathfinding options flags (see Room.findPath for more details).
      */
-    findPathTo(target: RoomPosition | RoomObject, opts?: FindPathOpts): PathStep[];
+    findPathTo(target: RoomPosition | RoomObjectLike, opts?: FindPathOpts): PathStep[];
     /**
      * Get linear direction to the specified position.
      * @param x X position in the room.
@@ -106,7 +106,7 @@ interface RoomPosition extends RoomPositionLike {
      * Get linear direction to the specified position.
      * @param target Can be a RoomPosition object or any object containing RoomPosition.
      */
-    getDirectionTo(target: RoomPosition | RoomObject): DIRECTION;
+    getDirectionTo(target: RoomPosition | RoomObjectLike): DIRECTION;
     /**
      * Get linear range to the specified position.
      * @param x X position in the room.
@@ -117,13 +117,13 @@ interface RoomPosition extends RoomPositionLike {
      * Get linear range to the specified position.
      * @param target Can be a RoomPosition object or any object containing RoomPosition.
      */
-    getRangeTo(target: RoomPosition | RoomObject): number;
+    getRangeTo(target: RoomPosition | RoomObjectLike): number;
     /**
      * Check whether this position is in the given range of another position.
      * @param toPos The target position.
      * @param range The range distance.
      */
-    inRangeTo(target: RoomPosition | RoomObject, range: number): boolean;
+    inRangeTo(target: RoomPosition | RoomObjectLike, range: number): boolean;
     /**
      * Check whether this position is the same as the specified position.
      * @param x X position in the room.
@@ -134,7 +134,7 @@ interface RoomPosition extends RoomPositionLike {
      * Check whether this position is the same as the specified position.
      * @param target Can be a RoomPosition object or any object containing RoomPosition.
      */
-    isEqualTo(target: RoomPosition | RoomObject): boolean;
+    isEqualTo(target: RoomPosition | RoomObjectLike): boolean;
     /**
      * Check whether this position is on the adjacent square to the specified position. The same as inRangeTo(target, 1).
      * @param x X position in the room.
@@ -145,7 +145,7 @@ interface RoomPosition extends RoomPositionLike {
      * Check whether this position is on the adjacent square to the specified position. The same as inRangeTo(target, 1).
      * @param target Can be a RoomPosition object or any object containing RoomPosition.
      */
-    isNearTo(target: RoomPosition | RoomObject): boolean;
+    isNearTo(target: RoomPosition | RoomObjectLike): boolean;
     /**
      * Get the list of objects at the specified room position.
      */
@@ -154,7 +154,17 @@ interface RoomPosition extends RoomPositionLike {
      * Get an object with the given type at the specified room position.
      * @param type One of the following string constants: constructionSite, creep, exit, flag, resource, source, structure, terrain
      */
-    lookFor<T>(type: string): T[];
+    lookFor<TLOOK extends LOOK>(type: TLOOK): __TARGET_LOOK<TLOOK>[];
+}
+
+{
+    //Typing tests
+    function __assert_Find<TFIND extends FIND>(r: RoomPosition, tpe: TFIND): __TARGET_FIND<TFIND>[] {
+        return r.findInRange(tpe, Infinity).concat(r.findClosestByPath<TFIND>(tpe));
+    }
+    function __assert_lookFor<TLOOK extends LOOK>(r: RoomPosition, tpe: TLOOK): __TARGET_LOOK<TLOOK>[] {
+        return r.lookFor(tpe).concat(r.lookFor<TLOOK>(tpe));
+    }
 }
 
 interface RoomPositionConstructor extends _Constructor<RoomPosition> {

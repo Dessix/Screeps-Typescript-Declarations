@@ -5,9 +5,9 @@ interface GlobalControlLevel {
 }
 
 interface CPU {
-    limit: number;
-    tickLimit: number;
-    bucket: number;
+    readonly limit: number;
+    readonly tickLimit: number;
+    readonly bucket: number;
 
     /**
      * Get amount of CPU time used from the beginning of the current game tick. Always returns 0 in the Simulation mode.
@@ -22,7 +22,7 @@ interface BodyPartDefinition {
     /**
      * If the body part is boosted, this property specifies the mineral type which is used for boosting. One of the RESOURCE_* constants.
      */
-    readonly boost: string;
+    readonly boost: RESOURCE;
     /**
      * One of the body part types constants.
      */
@@ -43,43 +43,31 @@ declare type DescribeExitsResult = {
 interface Owner {
     readonly username: string;
 }
+
 interface ReservationDefinition {
     readonly username: string;
     ticksToEnd: number;
 }
+
 interface SignDefinition {
     readonly username: string;
     readonly text: string;
     readonly time: number;
     readonly datetime: Date;
 }
-interface StoreDefinition {
+
+interface StoreDefinition {//TODO: AUTOPROPERTY
     readonly [resource: string]: number | undefined;
-    readonly energy?: number;
+    readonly energy: number;
     readonly power?: number;
 }
 
-interface LookAtResultWithPos {
-    x: number;
-    y: number;
-    type: string;
-    constructionSite?: ConstructionSite;
-    creep?: Creep;
-    terrain?: TERRAIN;
-    structure?: Structure;
-    flag?: Flag;
-    energy?: Resource;
-    exit?: any;
-    source?: Source;
-    mineral?: Mineral;
-    resource? : Resource;
-}
-interface LookAtResult {
-    type: string;
+interface LookAtResultTyped<TLOOK extends LOOK> {
+    type: TLOOK;
     constructionSite?: ConstructionSite;
     creep?: Creep;
     energy?: Resource;
-    exit?: any;
+    exit?: any;//TODO: Exit type?
     flag?: Flag;
     source?: Source;
     structure?: Structure;
@@ -87,28 +75,47 @@ interface LookAtResult {
     mineral?: Mineral;
     resource?: Resource;
 }
+interface LookAtResult extends LookAtResultTyped<LOOK> { }
+
+interface LookAtResultWithPosTyped<TLOOK extends LOOK> extends LookAtResultTyped<TLOOK> {
+    x: number;
+    y: number;
+}
+interface LookAtResultWithPos extends LookAtResultWithPosTyped<LOOK> { }
 
 interface SpawningSpec {
     /**
      * The name of a new creep.
      */
-    name: string;
+    readonly name: string;
     /**
      * Time needed in total to complete the spawning.
      */
-    needTime: number;
+    readonly needTime: number;
     /**
      * Remaining time to go.
      */
-    remainingTime: number;
+    readonly remainingTime: number;
 };
 
-interface LookAtResultMatrix {
-    [coord: number]: LookAtResultMatrix|LookAtResult[]
-}
+interface LookAtResultMatrixTyped<TLOOK extends LOOK> {
+    [yCoord: number]: {
+        [xCoord: number]: LookAtResultTyped<TLOOK>[];
+    }
+};
+interface LookAtResultMatrix extends LookAtResultMatrixTyped<LOOK> { }
 
 interface FindOpts<T> {
     filter: LodashStringFilterFor<T>;
+};
+
+interface PointLike {
+    x: number;
+    y: number;
+}
+
+interface RoomPositionLike extends PointLike {
+    roomName: string;
 }
 
 interface FindPathOpts {
@@ -182,6 +189,11 @@ interface FindPathOpts {
      * Path to within (range) tiles of target tile. The default is to path to the tile that the target is on (0).
      */
     range?: number;
+}
+
+interface FindPathOptsFilteredWithAlgorithm<T> extends FindPathOpts {
+    filter?: LodashStringFilterFor<T>;
+    algorithm?: "astar" | "dijkstra";
 }
 
 interface MoveToOpts extends FindPathOpts {

@@ -1,7 +1,7 @@
 /**
  * An object representing the room in which your units and structures are in. It can be used to look around, find paths, etc. Every object in the room contains its linked Room instance in the room property.
  */
-interface Room {
+interface __Room {
     readonly prototype: Room;
     /**
      * The name of the room.
@@ -22,7 +22,7 @@ interface Room {
     /**
      * A shorthand to Memory.rooms[room.name]. You can use it for quick access the room’s specific memory data object.
      */
-    memory: any;
+    memory?: RoomMemory;
     /**
      * One of the following constants:
      * MODE_SIMULATION, MODE_SURVIVAL, MODE_WORLD, MODE_ARENA
@@ -78,14 +78,14 @@ interface Room {
      * @param opts An object with additional options
      * @returns An array with the objects found.
      */
-    find<T>(type: number, opts?: FindOpts<T>): T[];
+    find<TFIND extends FIND>(type: TFIND, opts?: FindOpts<__TARGET_FIND<TFIND>>): __TARGET_FIND<TFIND>[];
     /**
      * Find the exit direction en route to another room.
      * @param room Another room name or room object.
      * @returns The room direction constant, one of the following: FIND_EXIT_TOP, FIND_EXIT_RIGHT, FIND_EXIT_BOTTOM, FIND_EXIT_LEFT
      * Or one of the following error codes: ERR_NO_PATH, ERR_INVALID_ARGS
      */
-    findExitTo(room: string | Room): FIND_EXIT_TOP | FIND_EXIT_RIGHT | FIND_EXIT_BOTTOM | FIND_EXIT_LEFT | ERR_NO_PATH | ERR_INVALID_ARGS;
+    findExitTo(room: (typeof Room.name) | Room): FIND_EXIT_TOP | FIND_EXIT_RIGHT | FIND_EXIT_BOTTOM | FIND_EXIT_LEFT | ERR_NO_PATH | ERR_INVALID_ARGS;
     /**
      * Find an optimal path inside the room between fromPos and toPos using A* search algorithm.
      * @param fromPos The start position.
@@ -113,7 +113,7 @@ interface Room {
      * @param target Can be a RoomPosition object or any object containing RoomPosition.
      * @returns An array with objects at the specified position
      */
-    lookAt(target: RoomPosition | RoomObject): LookAtResult[];
+    lookAt(target: RoomPosition | RoomObjectLike): LookAtResult[];
     /**
      * Get the list of objects at the specified room area. This method is more CPU efficient in comparison to multiple lookAt calls.
      * @param top The top Y boundary of the area.
@@ -123,7 +123,9 @@ interface Room {
      * @param asArray Set to true if you want to get the result as a plain array.
      * @returns An object with all the objects in the specified area
      */
-    lookAtArea(top: number, left: number, bottom: number, right: number, asArray?: boolean): LookAtResultMatrix | LookAtResultWithPos[];
+    lookAtArea(top: number, left: number, bottom: number, right: number): LookAtResultMatrix;
+    lookAtArea(top: number, left: number, bottom: number, right: number, asArray: false): LookAtResultMatrix;
+    lookAtArea(top: number, left: number, bottom: number, right: number, asArray: true): LookAtResultWithPos[];
     /**
      * Get an object with the given type at the specified room position.
      * @param type One of the following string constants: constructionSite, creep, energy, exit, flag, source, structure, terrain
@@ -131,14 +133,14 @@ interface Room {
      * @param y The Y position.
      * @returns An array of objects of the given type at the specified position if found.
      */
-    lookForAt<T>(type: string, x: number, y: number): T[];
+    lookForAt<TLOOK extends LOOK>(type: TLOOK, x: number, y: number): __TARGET_LOOK<TLOOK>[];
     /**
      * Get an object with the given type at the specified room position.
      * @param type One of the following string constants: constructionSite, creep, energy, exit, flag, source, structure, terrain
      * @param target Can be a RoomPosition object or any object containing RoomPosition.
      * @returns An array of objects of the given type at the specified position if found.
      */
-    lookForAt<T>(type: string, target: RoomPosition | RoomObject): T[];
+    lookForAt<TLOOK extends LOOK>(type: TLOOK, target: RoomPositionLike | RoomObjectLike): __TARGET_LOOK<TLOOK>[];
     /**
      * Get the list of objects with the given type at the specified room area. This method is more CPU efficient in comparison to multiple lookForAt calls.
      * @param type One of the following string constants: constructionSite, creep, energy, exit, flag, source, structure, terrain
@@ -148,7 +150,9 @@ interface Room {
      * @param right The right X boundary of the area.
      * @returns An object with all the objects of the given type in the specified area
      */
-    lookForAtArea(type: string, top: number, left: number, bottom: number, right: number, asArray?: boolean): LookAtResultMatrix | LookAtResultWithPos[];
+    lookForAtArea<TLOOK extends LOOK>(type: TLOOK, top: number, left: number, bottom: number, right: number): LookAtResultMatrixTyped<TLOOK>;
+    lookForAtArea<TLOOK extends LOOK>(type: TLOOK, top: number, left: number, bottom: number, right: number, asArray: false): LookAtResultMatrixTyped<TLOOK>;
+    lookForAtArea<TLOOK extends LOOK>(type: TLOOK, top: number, left: number, bottom: number, right: number, asArray: true): LookAtResultWithPosTyped<TLOOK>[];
 
     /**
      * Serialize a path array into a short string representation, which is suitable to store in memory.
@@ -163,8 +167,10 @@ interface Room {
      */
 }
 
+interface Room extends __Room { }
+
 interface RoomConstructor {
-    new (id: string): Room;
+    new (id: (typeof Room.name)): Room;
     serializePath(path: PathStep[]): string;
     deserializePath(path: string): PathStep[];
 }
