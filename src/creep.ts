@@ -63,7 +63,7 @@ interface Creep extends RoomObject {
     readonly spawning: boolean;
     /**
      * The text message that the creep was saying at the last tick.
-     */ 
+     */
     readonly saying: string;
     /**
      * The remaining amount of game ticks after which the creep will die.
@@ -107,7 +107,7 @@ interface Creep extends RoomObject {
      * @param resourceType One of the RESOURCE_* constants.
      * @param amount The amount of resource units to be dropped. If omitted, all the available carried amount is used.
      */
-    drop(resourceType: string, amount?: number): OK | ERR_NOT_OWNER | ERR_BUSY | ERR_NOT_ENOUGH_RESOURCES;
+    drop(resourceType: RESOURCE, amount?: number): OK | ERR_NOT_OWNER | ERR_BUSY | ERR_NOT_ENOUGH_RESOURCES;
     /**
      * Add one more available safe mode activation to a room controller. The creep has to be at adjacent square to the target room controller and have 1000 ghodium resource.
      * @param target The target room controller.
@@ -194,7 +194,7 @@ interface Creep extends RoomObject {
      */
     say(message: string, toPublic?: boolean): OK | ERR_NOT_OWNER | ERR_BUSY;
     /**
-     * Sign a controller with a random text visible to all players. This text will appear in the room UI, in the world map, and can be accessed via the API. 
+     * Sign a controller with a random text visible to all players. This text will appear in the room UI, in the world map, and can be accessed via the API.
      * You can sign unowned and hostile controllers. The target has to be at adjacent square to the creep. Pass an empty string to remove the sign.
      * @param target The target controller object to be signed.
      * @param text The sign text. The maximum text length is 100 characters.
@@ -211,7 +211,7 @@ interface Creep extends RoomObject {
      * @param resourceType One of the RESOURCE_* constants
      * @param amount The amount of resources to be transferred. If omitted, all the available carried amount is used.
      */
-    transfer(target: Creep | Structure, resourceType: string, amount?: number): OK | ERR_NOT_OWNER | ERR_BUSY | ERR_NOT_ENOUGH_RESOURCES | ERR_INVALID_TARGET | ERR_FULL | ERR_NOT_IN_RANGE | ERR_INVALID_ARGS;
+    transfer(target: Creep | Structure, resourceType: RESOURCE, amount?: number): OK | ERR_NOT_OWNER | ERR_BUSY | ERR_NOT_ENOUGH_RESOURCES | ERR_INVALID_TARGET | ERR_FULL | ERR_NOT_IN_RANGE | ERR_INVALID_ARGS;
     /**
      * Upgrade your controller to the next level using carried energy. Upgrading controllers raises your Global Control Level in parallel. Needs WORK and CARRY body parts. The target has to be at adjacent square to the creep. A fully upgraded level 8 controller can't be upgraded with the power over 15 energy units per tick regardless of creeps power. The cumulative effect of all the creeps performing upgradeController in the current tick is taken into account.
      * @param target The target controller object to be upgraded.
@@ -223,7 +223,7 @@ interface Creep extends RoomObject {
      * @param resourceType The target One of the RESOURCE_* constants..
      * @param amount The amount of resources to be transferred. If omitted, all the available amount is used.
      */
-    withdraw(target: Structure, resourceType: string, amount?: number): OK | ERR_NOT_OWNER | ERR_BUSY | ERR_NOT_ENOUGH_RESOURCES | ERR_INVALID_TARGET | ERR_FULL | ERR_NOT_IN_RANGE | ERR_INVALID_ARGS;
+    withdraw(target: Creep | Structure, resourceType: RESOURCE, amount?: number): OK | ERR_NOT_OWNER | ERR_BUSY | ERR_NOT_ENOUGH_RESOURCES | ERR_INVALID_TARGET | ERR_FULL | ERR_NOT_IN_RANGE | ERR_INVALID_ARGS;
 }
 
 interface CreepConstructor extends _Constructor<Creep>, _ConstructorById<Creep> {

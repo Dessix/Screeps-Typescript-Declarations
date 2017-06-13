@@ -357,7 +357,7 @@ interface StructureStorage extends OwnedStructure {
      * @param resourceType One of the RESOURCE_* constants.
      * @param amount The amount of resources to be transferred. If omitted, all the available amount is used.
      */
-    transfer(target: Creep, resourceType: string, amount?: number): OK | ERR_NOT_OWNER | ERR_NOT_ENOUGH_RESOURCES | ERR_INVALID_TARGET | ERR_FULL | ERR_NOT_IN_RANGE | ERR_INVALID_ARGS;
+    transfer(target: Creep, resourceType: RESOURCE, amount?: number): OK | ERR_NOT_OWNER | ERR_NOT_ENOUGH_RESOURCES | ERR_INVALID_TARGET | ERR_FULL | ERR_NOT_IN_RANGE | ERR_INVALID_ARGS;
     /**
      * @deprecated
      * An alias for storage.transfer(target, RESOURCE_ENERGY, amount).
@@ -506,7 +506,7 @@ interface StructureLab extends OwnedStructure {
      * @param resourceType One of the RESOURCE_* constants.
      * @param amount The amount of resources to be transferred. If omitted, all the available amount is used.
      */
-    transfer(target: Creep, resourceType: string, amount?: number): OK | ERR_NOT_OWNER | ERR_NOT_ENOUGH_RESOURCES | ERR_INVALID_TARGET | ERR_FULL | ERR_NOT_IN_RANGE | ERR_INVALID_ARGS;
+    transfer(target: Creep, resourceType: RESOURCE, amount?: number): OK | ERR_NOT_OWNER | ERR_NOT_ENOUGH_RESOURCES | ERR_INVALID_TARGET | ERR_FULL | ERR_NOT_IN_RANGE | ERR_INVALID_ARGS;
 }
 
 interface StructureLabConstructor extends _Constructor<StructureLab>, _ConstructorById<StructureLab> {
@@ -534,7 +534,7 @@ interface StructureTerminal extends OwnedStructure {
      * @param destination The name of the target room. You don't have to gain visibility in this room.
      * @param description The description of the transaction. It is visible to the recipient. The maximum length is 100 characters.
      */
-    send(resourceType: string, amount: number, destination: string, description?: string): OK | ERR_NOT_OWNER | ERR_NOT_ENOUGH_RESOURCES | ERR_INVALID_ARGS;
+    send(resourceType: RESOURCE, amount: number, destination: string, description?: string): OK | ERR_NOT_OWNER | ERR_NOT_ENOUGH_RESOURCES | ERR_INVALID_ARGS;
     /**
      * @deprecated
      * Transfer resource from this terminal to a creep. The target has to be at adjacent square.
@@ -542,7 +542,7 @@ interface StructureTerminal extends OwnedStructure {
      * @param resourceType One of the RESOURCE_* constants.
      * @param amount The amount of resources to be transferred. If omitted, all the available amount is used.
      */
-    transfer(target: Creep, resourceType: string, amount?: number): OK | ERR_NOT_OWNER | ERR_NOT_ENOUGH_RESOURCES | ERR_INVALID_TARGET | ERR_FULL | ERR_NOT_IN_RANGE | ERR_INVALID_ARGS;
+    transfer(target: Creep, resourceType: RESOURCE, amount?: number): OK | ERR_NOT_OWNER | ERR_NOT_ENOUGH_RESOURCES | ERR_INVALID_TARGET | ERR_FULL | ERR_NOT_IN_RANGE | ERR_INVALID_ARGS;
 }
 
 interface StructureTerminalConstructor extends _Constructor<StructureTerminal>, _ConstructorById<StructureTerminal> {
@@ -575,7 +575,7 @@ interface StructureContainer extends Structure {
      * @param resourceType One of the RESOURCE_* constants.
      * @param amount The amount of resources to be transferred. If omitted, all the available amount is used.
      */
-    transfer(target: Creep, resourceType: string, amount?: number): OK | ERR_NOT_OWNER | ERR_NOT_ENOUGH_RESOURCES | ERR_INVALID_TARGET | ERR_FULL | ERR_NOT_IN_RANGE | ERR_INVALID_ARGS;
+    transfer(target: Creep, resourceType: RESOURCE, amount?: number): OK | ERR_NOT_OWNER | ERR_NOT_ENOUGH_RESOURCES | ERR_INVALID_TARGET | ERR_FULL | ERR_NOT_IN_RANGE | ERR_INVALID_ARGS;
 }
 
 interface StructureContainerConstructor extends _Constructor<StructureContainer>, _ConstructorById<StructureContainer> {

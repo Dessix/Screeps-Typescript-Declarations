@@ -47,57 +47,36 @@ declare type IdFor<T> = string & __ID<T>;
 declare type __MINE = { my: true; };
 declare type __HOSTILE = { my: false; };
 
-declare type FIND_EXIT_TOP = 1; declare const FIND_EXIT_TOP: FIND_EXIT_TOP;
-declare type FIND_EXIT_RIGHT = 3; declare const FIND_EXIT_RIGHT: FIND_EXIT_RIGHT;
-declare type FIND_EXIT_BOTTOM = 5; declare const FIND_EXIT_BOTTOM: FIND_EXIT_BOTTOM;
-declare type FIND_EXIT_LEFT = 7; declare const FIND_EXIT_LEFT: FIND_EXIT_LEFT;
-declare type FIND_EXIT = 10; declare const FIND_EXIT: FIND_EXIT;
-declare type FIND_CREEPS = 101 & string; declare const FIND_CREEPS: FIND_CREEPS;
-declare type FIND_MY_CREEPS = 102 & string; declare const FIND_MY_CREEPS: FIND_MY_CREEPS;
-declare type FIND_HOSTILE_CREEPS = 103 & string; declare const FIND_HOSTILE_CREEPS: FIND_HOSTILE_CREEPS;
-declare type FIND_SOURCES_ACTIVE = 104 & string; declare const FIND_SOURCES_ACTIVE: FIND_SOURCES_ACTIVE;
-declare type FIND_SOURCES = 105 & string; declare const FIND_SOURCES: FIND_SOURCES;
-declare type FIND_DROPPED_RESOURCES_OR_ENERGY = 106 & string;//Yep. It's 106. And they're both the same.
-declare type FIND_DROPPED_RESOURCES = FIND_DROPPED_RESOURCES_OR_ENERGY & string; declare const FIND_DROPPED_RESOURCES: FIND_DROPPED_RESOURCES;
-declare type FIND_DROPPED_ENERGY = FIND_DROPPED_RESOURCES_OR_ENERGY & string; declare const FIND_DROPPED_ENERGY: FIND_DROPPED_ENERGY;
-declare type FIND_STRUCTURES = 107 & string; declare const FIND_STRUCTURES: FIND_STRUCTURES;
-declare type FIND_MY_STRUCTURES = 108 & string; declare const FIND_MY_STRUCTURES: FIND_MY_STRUCTURES;
-declare type FIND_HOSTILE_STRUCTURES = 109 & string; declare const FIND_HOSTILE_STRUCTURES: FIND_HOSTILE_STRUCTURES;
-declare type FIND_FLAGS = 110 & string; declare const FIND_FLAGS: FIND_FLAGS;
-declare type FIND_CONSTRUCTION_SITES = 111 & string; declare const FIND_CONSTRUCTION_SITES: FIND_CONSTRUCTION_SITES;
-declare type FIND_MY_SPAWNS = 112 & string; declare const FIND_MY_SPAWNS: FIND_MY_SPAWNS;
-declare type FIND_HOSTILE_SPAWNS = 113 & string; declare const FIND_HOSTILE_SPAWNS: FIND_HOSTILE_SPAWNS;
-declare type FIND_MY_CONSTRUCTION_SITES = 114 & string; declare const FIND_MY_CONSTRUCTION_SITES: FIND_MY_CONSTRUCTION_SITES;
-declare type FIND_HOSTILE_CONSTRUCTION_SITES = 115 & string; declare const FIND_HOSTILE_CONSTRUCTION_SITES: FIND_HOSTILE_CONSTRUCTION_SITES;
-declare type FIND_MINERALS = 116 & string; declare const FIND_MINERALS: FIND_MINERALS;
-declare type FIND_NUKES = 117 & string; declare const FIND_NUKES: FIND_NUKES;
-declare type FIND = (
-    | FIND_EXIT_TOP
-    | FIND_EXIT_RIGHT
-    | FIND_EXIT_BOTTOM
-    | FIND_EXIT_LEFT
-    | FIND_EXIT
-    | FIND_CREEPS
-    | FIND_MY_CREEPS
-    | FIND_HOSTILE_CREEPS
-    | FIND_SOURCES_ACTIVE
-    | FIND_SOURCES
-    | FIND_DROPPED_RESOURCES_OR_ENERGY
-    | FIND_DROPPED_RESOURCES
-    | FIND_DROPPED_ENERGY
-    | FIND_STRUCTURES
-    | FIND_MY_STRUCTURES
-    | FIND_HOSTILE_STRUCTURES
-    | FIND_FLAGS
-    | FIND_CONSTRUCTION_SITES
-    | FIND_MY_SPAWNS
-    | FIND_HOSTILE_SPAWNS
-    | FIND_MY_CONSTRUCTION_SITES
-    | FIND_HOSTILE_CONSTRUCTION_SITES
-    | FIND_MINERALS
-    | FIND_NUKES
-);
+declare type FIND_EXIT_TOP = "1"; declare const FIND_EXIT_TOP: FIND_EXIT_TOP;
+declare type FIND_EXIT_RIGHT = "3"; declare const FIND_EXIT_RIGHT: FIND_EXIT_RIGHT;
+declare type FIND_EXIT_BOTTOM = "5"; declare const FIND_EXIT_BOTTOM: FIND_EXIT_BOTTOM;
+declare type FIND_EXIT_LEFT = "7"; declare const FIND_EXIT_LEFT: FIND_EXIT_LEFT;
+declare type FIND_EXIT = "10"; declare const FIND_EXIT: FIND_EXIT;
+declare type FIND_CREEPS = "101"; declare const FIND_CREEPS: FIND_CREEPS;
+declare type FIND_MY_CREEPS = "102"; declare const FIND_MY_CREEPS: FIND_MY_CREEPS;
+declare type FIND_HOSTILE_CREEPS = "103"; declare const FIND_HOSTILE_CREEPS: FIND_HOSTILE_CREEPS;
+declare type FIND_SOURCES_ACTIVE = "104"; declare const FIND_SOURCES_ACTIVE: FIND_SOURCES_ACTIVE;
+declare type FIND_SOURCES = "105"; declare const FIND_SOURCES: FIND_SOURCES;
+declare type FIND_DROPPED_RESOURCES_OR_ENERGY = "106";//Yep. It's 106. And they're both the same.
+declare type FIND_DROPPED_RESOURCES = FIND_DROPPED_RESOURCES_OR_ENERGY; declare const FIND_DROPPED_RESOURCES: FIND_DROPPED_RESOURCES;
+declare type FIND_DROPPED_ENERGY = FIND_DROPPED_RESOURCES_OR_ENERGY; declare const FIND_DROPPED_ENERGY: FIND_DROPPED_ENERGY;
+declare type FIND_STRUCTURES = "107"; declare const FIND_STRUCTURES: FIND_STRUCTURES;
+declare type FIND_MY_STRUCTURES = "108"; declare const FIND_MY_STRUCTURES: FIND_MY_STRUCTURES;
+declare type FIND_HOSTILE_STRUCTURES = "109"; declare const FIND_HOSTILE_STRUCTURES: FIND_HOSTILE_STRUCTURES;
+declare type FIND_FLAGS = "110"; declare const FIND_FLAGS: FIND_FLAGS;
+declare type FIND_CONSTRUCTION_SITES = "111"; declare const FIND_CONSTRUCTION_SITES: FIND_CONSTRUCTION_SITES;
+declare type FIND_MY_SPAWNS = "112"; declare const FIND_MY_SPAWNS: FIND_MY_SPAWNS;
+declare type FIND_HOSTILE_SPAWNS = "113"; declare const FIND_HOSTILE_SPAWNS: FIND_HOSTILE_SPAWNS;
+declare type FIND_MY_CONSTRUCTION_SITES = "114"; declare const FIND_MY_CONSTRUCTION_SITES: FIND_MY_CONSTRUCTION_SITES;
+declare type FIND_HOSTILE_CONSTRUCTION_SITES = "115"; declare const FIND_HOSTILE_CONSTRUCTION_SITES: FIND_HOSTILE_CONSTRUCTION_SITES;
+declare type FIND_MINERALS = "116"; declare const FIND_MINERALS: FIND_MINERALS;
+declare type FIND_NUKES = "117"; declare const FIND_NUKES: FIND_NUKES;
 declare type __TARGETKEYS_FIND = (
+    & Record<FIND_EXIT_TOP, RoomPosition>
+    & Record<FIND_EXIT_RIGHT, RoomPosition>
+    & Record<FIND_EXIT_BOTTOM, RoomPosition>
+    & Record<FIND_EXIT_LEFT, RoomPosition>
+    & Record<FIND_EXIT, RoomPosition>
     & Record<FIND_CREEPS, Creep>
     & Record<FIND_MY_CREEPS, Creep & __MINE>
     & Record<FIND_HOSTILE_CREEPS, Creep & __HOSTILE>
@@ -118,6 +97,8 @@ declare type __TARGETKEYS_FIND = (
     & Record<FIND_MINERALS, Mineral>
     & Record<FIND_NUKES, Nuke>
 );
+declare type FIND = keyof __TARGETKEYS_FIND;
+declare type __TARGET_FIND<TFIND extends FIND> = __TARGETKEYS_FIND[TFIND];
 
 declare type TOP = 1; declare const TOP: TOP;
 declare type TOP_RIGHT = 2; declare const TOP_RIGHT: TOP_RIGHT;
@@ -341,6 +322,28 @@ declare type STRUCTURE = CONSTRUCTABLE_STRUCTURE | (
     | STRUCTURE_PORTAL
     | STRUCTURE_POWER_BANK
 );
+declare type __TARGETKEYS_STRUCTURE = (
+    & Record<STRUCTURE_CONTAINER, StructureContainer>
+    & Record<STRUCTURE_CONTROLLER, StructureController>
+    & Record<STRUCTURE_EXTENSION, StructureExtension>
+    & Record<STRUCTURE_EXTRACTOR, StructureExtractor>
+    & Record<STRUCTURE_KEEPER_LAIR, StructureKeeperLair>
+    & Record<STRUCTURE_LAB, StructureLab>
+    & Record<STRUCTURE_LINK, StructureLink>
+    & Record<STRUCTURE_NUKER, StructureNuker>
+    & Record<STRUCTURE_OBSERVER, StructureObserver>
+    & Record<STRUCTURE_PORTAL, StructurePortal>
+    & Record<STRUCTURE_POWER_BANK, StructurePowerBank>
+    & Record<STRUCTURE_POWER_SPAWN, StructurePowerSpawn>
+    & Record<STRUCTURE_RAMPART, StructureRampart>
+    & Record<STRUCTURE_ROAD, StructureRoad>
+    & Record<STRUCTURE_SPAWN, StructureSpawn>
+    & Record<STRUCTURE_STORAGE, StructureStorage>
+    & Record<STRUCTURE_TERMINAL, StructureTerminal>
+    & Record<STRUCTURE_TOWER, StructureTower>
+    & Record<STRUCTURE_WALL, StructureWall>
+);
+declare type __TARGET_STRUCTURE<TSTRUCTURE extends STRUCTURE> = __TARGETKEYS_STRUCTURE[TSTRUCTURE];
 
 declare const RESOURCE_ENERGY: "energy";
 declare const RESOURCE_POWER: "power";
@@ -493,6 +496,11 @@ declare type TERRAIN_WALL = "wall";
 declare const TERRAIN_MASK_WALL: number;
 declare const TERRAIN_MASK_SWAMP: number;
 declare const TERRAIN_MASK_LAVA: number;
+declare type TERRAIN = (
+    | TERRAIN_PLAIN
+    | TERRAIN_SWAMP
+    | TERRAIN_WALL
+);
 
 declare const MAX_CONSTRUCTION_SITES: number;
 declare const MAX_CREEP_SIZE: number;
@@ -577,18 +585,6 @@ declare type LOOK_CONSTRUCTION_SITES = "constructionSite"; declare const LOOK_CO
 declare type LOOK_NUKES = "nuke"; declare const LOOK_NUKES: LOOK_NUKES;
 declare type LOOK_TERRAIN = "terrain"; declare const LOOK_TERRAIN: LOOK_TERRAIN;
 
-declare type LOOK = (
-    | LOOK_CREEPS
-    | LOOK_ENERGY
-    | LOOK_RESOURCES
-    | LOOK_SOURCES
-    | LOOK_MINERALS
-    | LOOK_STRUCTURES
-    | LOOK_FLAGS
-    | LOOK_CONSTRUCTION_SITES
-    | LOOK_NUKES
-    | LOOK_TERRAIN
-);
 declare type __TARGETKEYS_LOOK = (
     & Record<LOOK_CREEPS, Creep>
     & Record<LOOK_ENERGY, Resource & { resourceType: typeof RESOURCE_ENERGY }>
@@ -599,8 +595,10 @@ declare type __TARGETKEYS_LOOK = (
     & Record<LOOK_FLAGS, Flag>
     & Record<LOOK_CONSTRUCTION_SITES, ConstructionSite>
     & Record<LOOK_NUKES, Nuke>
+    & Record<LOOK_TERRAIN, TERRAIN>
 );
-// & Record<LOOK_TERRAIN, /* Terrain type */>
+declare type LOOK = keyof __TARGETKEYS_LOOK;
+declare type __TARGET_LOOK<TLOOK extends LOOK> = __TARGETKEYS_LOOK[TLOOK];
 
 declare const ORDER_SELL: "sell";
 declare const ORDER_BUY: "buy";
