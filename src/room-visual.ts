@@ -1,12 +1,8 @@
-declare class RoomVisual {
-    /** The name of the room. */
-    roomName: string;
+declare interface RoomVisual {
+    readonly prototype: RoomVisualConstructor;
 
-    /**
-     * You can directly create new RoomVisual object in any room, even if it's invisible to your script.
-     * @param roomName The room name.
-     */
-    constructor(roomName: string);
+    /** The name of the room. */
+    roomName?: string;
 
     /**
      * Draw a line.
@@ -96,3 +92,16 @@ interface TextStyle {
     align?: "center" | "left" | "right";
     opacity?: number;
 }
+
+interface RoomVisualConstructor {
+  /**
+   * You can directly create new RoomVisual object in any room, even if it's invisible to your script.
+   * @param roomName The room name.
+   */
+  new(roomName: string): RoomVisual;
+
+  /** Create a new global RoomVisual instance */
+  new(): RoomVisual;
+}
+
+declare const RoomVisual: RoomVisualConstructor;

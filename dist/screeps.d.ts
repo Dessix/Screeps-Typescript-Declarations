@@ -1743,14 +1743,10 @@ interface RoomPositionConstructor extends _Constructor<RoomPosition> {
     (x: number, y: number, roomName: string): RoomPosition;
 }
 declare const RoomPosition: RoomPositionConstructor;
-declare class RoomVisual {
+interface RoomVisual {
+    readonly prototype: RoomVisualConstructor;
     /** The name of the room. */
-    roomName: string;
-    /**
-     * You can directly create new RoomVisual object in any room, even if it's invisible to your script.
-     * @param roomName The room name.
-     */
-    constructor(roomName: string);
+    roomName?: string;
     /**
      * Draw a line.
      * @param x1 The start X coordinate.
@@ -1829,6 +1825,16 @@ interface TextStyle {
     align?: "center" | "left" | "right";
     opacity?: number;
 }
+interface RoomVisualConstructor {
+    /**
+     * You can directly create new RoomVisual object in any room, even if it's invisible to your script.
+     * @param roomName The room name.
+     */
+    new (roomName: string): RoomVisual;
+    /** Create a new global RoomVisual instance */
+    new (): RoomVisual;
+}
+declare const RoomVisual: RoomVisualConstructor;
 /**
  * An object representing the room in which your units and structures are in. It can be used to look around, find paths, etc. Every object in the room contains its linked Room instance in the room property.
  */
