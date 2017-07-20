@@ -14,6 +14,7 @@ declare interface RoomVisual {
      * @returns The RoomVisual object, for chaining.
      */
     line(x1: number, y1: number, x2: number, y2: number, style?: LineStyle): RoomVisual;
+    line(p1: RoomPosition, p2: RoomPosition, style?: LineStyle): RoomVisual;
 
     /**
      * Draw a circle.
@@ -23,6 +24,7 @@ declare interface RoomVisual {
      * @returns The RoomVisual object, for chaining.
      */
     circle(x: number, y: number, style?: CircleStyle): RoomVisual;
+    circle(pos: RoomPosition, style?: CircleStyle): RoomVisual;
 
     /**
      * Draw a rectangle.
@@ -34,6 +36,7 @@ declare interface RoomVisual {
      * @returns The RoomVisual object, for chaining.
      */
     rect(x: number, y: number, w: number, h: number, style?: PolyStyle): RoomVisual;
+    rect(topLeftPos: RoomPosition, w: number, h: number, style?: PolyStyle): RoomVisual;
 
     /**
      * Draw a polygon.
@@ -41,7 +44,7 @@ declare interface RoomVisual {
      * @param style The (optional) style.
      * @returns The RoomVisual object, for chaining.
      */
-    poly(points: [number, number][], style?: PolyStyle): RoomVisual;
+    poly(points: Array<[number, number] | RoomPosition>, style?: PolyStyle): RoomVisual;
 
     /**
      * Draw a text label.
@@ -52,6 +55,7 @@ declare interface RoomVisual {
      * @returns The RoomVisual object, for chaining.
      */
     text(text: string, x: number, y: number, style?: TextStyle): RoomVisual;
+    text(text: string, pos: RoomPosition, style?: TextStyle): RoomVisual;
 
     /**
      * Remove all visuals from the room.
@@ -91,6 +95,9 @@ interface TextStyle {
     size?: number;
     align?: "center" | "left" | "right";
     opacity?: number;
+    font?: string | number;
+    stroke?: string | undefined;
+    strokeWidth?: number;
 }
 
 interface RoomVisualConstructor {

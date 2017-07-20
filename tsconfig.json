@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
     "module": "system",
-    "target": "es6",
+    "target": "es2017",
     "sourceMap": false,
     "declaration": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
+    "strict": true,
     "outFile": "./dist/screeps.ts",
-    "newLine": "LF"
+    "newLine": "lf"
   },
   "include": ["./src/**/*.ts"],
   "exclude": ["node_modules", "dist"]
