@@ -70,6 +70,7 @@ declare const FIND_SOURCES: FIND_SOURCES;
 declare type FIND_DROPPED_RESOURCES_OR_ENERGY = "106";
 declare type FIND_DROPPED_RESOURCES = FIND_DROPPED_RESOURCES_OR_ENERGY;
 declare const FIND_DROPPED_RESOURCES: FIND_DROPPED_RESOURCES;
+/** @deprecated FIND_DROPPED_ENERGY constant is considered deprecated and will be removed soon. Please use FIND_DROPPED_RESOURCES instead. */
 declare type FIND_DROPPED_ENERGY = FIND_DROPPED_RESOURCES_OR_ENERGY;
 declare const FIND_DROPPED_ENERGY: FIND_DROPPED_ENERGY;
 declare type FIND_STRUCTURES = "107";
@@ -989,6 +990,16 @@ interface PointLike {
 interface RoomPositionLike extends PointLike {
     roomName: string;
 }
+interface PointLike {
+    x: number;
+    y: number;
+}
+interface RoomPositionLike extends PointLike {
+    roomName: string;
+}
+interface RoomObjectLike {
+    pos: RoomPositionLike;
+}
 interface FindPathOpts {
     /**
      * Treat squares with creeps as walkable. Can be useful with too many moving creeps around or in some other cases. The default
@@ -1779,6 +1790,7 @@ declare const RoomPosition: RoomPositionConstructor;
 interface RoomVisual {
     readonly prototype: RoomVisualConstructor;
     /** The name of the room. */
+    /** Undefined when this instance is not specific to any one room */
     roomName?: string;
     /**
      * Draw a line.
@@ -1797,7 +1809,7 @@ interface RoomVisual {
      * @param style The (optional) style.
      * @returns The RoomVisual object, for chaining.
      */
-    line(pos1: RoomPosition, pos2: RoomPosition, style?: LineStyle): RoomVisual;
+    line(pos1: PointLike, pos2: PointLike, style?: LineStyle): RoomVisual;
     /**
      * Draw a circle.
      * @param x The X coordinate of the center.
@@ -1812,7 +1824,7 @@ interface RoomVisual {
      * @param style The (optional) style.
      * @returns The RoomVisual object, for chaining.
      */
-    circle(pos: RoomPosition, style?: CircleStyle): RoomVisual;
+    circle(pos: PointLike, style?: CircleStyle): RoomVisual;
     /**
      * Draw a rectangle.
      * @param x The X coordinate of the top-left corner.
@@ -1831,14 +1843,14 @@ interface RoomVisual {
      * @param style The (optional) style.
      * @returns The RoomVisual object, for chaining.
      */
-    rect(topLeftPos: RoomPosition, width: number, height: number, style?: PolyStyle): RoomVisual;
+    rect(topLeftPos: PointLike, width: number, height: number, style?: PolyStyle): RoomVisual;
     /**
      * Draw a polygon.
      * @param points An array of point coordinate arrays, i.e. [[0,0], [5,5], [5,10]].
      * @param style The (optional) style.
      * @returns The RoomVisual object, for chaining.
      */
-    poly(points: Array<[number, number] | RoomPosition>, style?: PolyStyle): RoomVisual;
+    poly(points: Array<[number, number] | PointLike>, style?: PolyStyle): RoomVisual;
     /**
      * Draw a text label.
      * @param text The text message.
@@ -1855,7 +1867,7 @@ interface RoomVisual {
      * @param style The (optional) text style.
      * @returns The RoomVisual object, for chaining.
      */
-    text(text: string, pos: RoomPosition, style?: TextStyle): RoomVisual;
+    text(text: string, pos: PointLike, style?: TextStyle): RoomVisual;
     /**
      * Remove all visuals from the room.
      * @returns The RoomVisual object, for chaining.
@@ -1867,6 +1879,12 @@ interface RoomVisual {
      * @returns The size of the visuals in bytes.
      */
     getSize(): number;
+}
+interface GlobalRoomVisual extends RoomVisual {
+    roomName: undefined;
+}
+interface RoomSpecificRoomVisual<TRoomName extends string> extends RoomVisual {
+    roomName: TRoomName;
 }
 interface LineStyle {
     width?: number;
@@ -1898,9 +1916,9 @@ interface RoomVisualConstructor {
      * You can directly create new RoomVisual object in any room, even if it's invisible to your script.
      * @param roomName The room name.
      */
-    new (roomName: string): RoomVisual;
+    new (roomName: string): RoomSpecificRoomVisual<typeof roomName>;
     /** Create a new global RoomVisual instance */
-    new (): RoomVisual;
+    new (): GlobalRoomVisual;
 }
 declare const RoomVisual: RoomVisualConstructor;
 /**

@@ -59,7 +59,10 @@ declare type FIND_SOURCES_ACTIVE = "104"; declare const FIND_SOURCES_ACTIVE: FIN
 declare type FIND_SOURCES = "105"; declare const FIND_SOURCES: FIND_SOURCES;
 declare type FIND_DROPPED_RESOURCES_OR_ENERGY = "106";//Yep. It's 106. And they're both the same.
 declare type FIND_DROPPED_RESOURCES = FIND_DROPPED_RESOURCES_OR_ENERGY; declare const FIND_DROPPED_RESOURCES: FIND_DROPPED_RESOURCES;
+
+/** @deprecated FIND_DROPPED_ENERGY constant is considered deprecated and will be removed soon. Please use FIND_DROPPED_RESOURCES instead. */
 declare type FIND_DROPPED_ENERGY = FIND_DROPPED_RESOURCES_OR_ENERGY; declare const FIND_DROPPED_ENERGY: FIND_DROPPED_ENERGY;
+
 declare type FIND_STRUCTURES = "107"; declare const FIND_STRUCTURES: FIND_STRUCTURES;
 declare type FIND_MY_STRUCTURES = "108"; declare const FIND_MY_STRUCTURES: FIND_MY_STRUCTURES;
 declare type FIND_HOSTILE_STRUCTURES = "109"; declare const FIND_HOSTILE_STRUCTURES: FIND_HOSTILE_STRUCTURES;

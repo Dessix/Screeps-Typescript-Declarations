@@ -2,6 +2,7 @@ declare interface RoomVisual {
     readonly prototype: RoomVisualConstructor;
 
     /** The name of the room. */
+    /** Undefined when this instance is not specific to any one room */
     roomName?: string;
 
     /**
@@ -22,7 +23,7 @@ declare interface RoomVisual {
      * @param style The (optional) style.
      * @returns The RoomVisual object, for chaining.
      */
-    line(pos1: RoomPosition, pos2: RoomPosition, style?: LineStyle): RoomVisual;
+    line(pos1: PointLike, pos2: PointLike, style?: LineStyle): RoomVisual;
 
     /**
      * Draw a circle.
@@ -39,7 +40,7 @@ declare interface RoomVisual {
      * @param style The (optional) style.
      * @returns The RoomVisual object, for chaining.
      */
-    circle(pos: RoomPosition, style?: CircleStyle): RoomVisual;
+    circle(pos: PointLike, style?: CircleStyle): RoomVisual;
 
     /**
      * Draw a rectangle.
@@ -60,7 +61,7 @@ declare interface RoomVisual {
      * @param style The (optional) style.
      * @returns The RoomVisual object, for chaining.
      */
-    rect(topLeftPos: RoomPosition, width: number, height: number, style?: PolyStyle): RoomVisual;
+    rect(topLeftPos: PointLike, width: number, height: number, style?: PolyStyle): RoomVisual;
 
     /**
      * Draw a polygon.
@@ -68,7 +69,7 @@ declare interface RoomVisual {
      * @param style The (optional) style.
      * @returns The RoomVisual object, for chaining.
      */
-    poly(points: Array<[number, number] | RoomPosition>, style?: PolyStyle): RoomVisual;
+    poly(points: Array<[number, number] | PointLike>, style?: PolyStyle): RoomVisual;
 
     /**
      * Draw a text label.
@@ -87,7 +88,7 @@ declare interface RoomVisual {
      * @param style The (optional) text style.
      * @returns The RoomVisual object, for chaining.
      */
-    text(text: string, pos: RoomPosition, style?: TextStyle): RoomVisual;
+    text(text: string, pos: PointLike, style?: TextStyle): RoomVisual;
 
     /**
      * Remove all visuals from the room.
@@ -101,6 +102,14 @@ declare interface RoomVisual {
      * @returns The size of the visuals in bytes.
      */
     getSize(): number;
+}
+
+interface GlobalRoomVisual extends RoomVisual {
+    roomName: undefined;
+}
+
+interface RoomSpecificRoomVisual<TRoomName extends string> extends RoomVisual {
+    roomName: TRoomName;
 }
 
 interface LineStyle {
@@ -133,14 +142,14 @@ interface TextStyle {
 }
 
 interface RoomVisualConstructor {
-  /**
-   * You can directly create new RoomVisual object in any room, even if it's invisible to your script.
-   * @param roomName The room name.
-   */
-  new(roomName: string): RoomVisual;
+    /**
+     * You can directly create new RoomVisual object in any room, even if it's invisible to your script.
+     * @param roomName The room name.
+     */
+    new(roomName: string): RoomSpecificRoomVisual<typeof roomName>;
 
-  /** Create a new global RoomVisual instance */
-  new(): RoomVisual;
+    /** Create a new global RoomVisual instance */
+    new(): GlobalRoomVisual;
 }
 
 declare const RoomVisual: RoomVisualConstructor;
